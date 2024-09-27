@@ -1,0 +1,85 @@
+name: " iRingo: ⭕ Siri & Search β"
+desc: |-
+  V1️⃣ & iOS 17.6⬇️ & BETA
+  全面自定义「Siri与搜索」中的「Siri 建议」功能。
+  本模块不含自定义「Siri与搜索」中的「询问 Siri」功能。
+  注：该覆写包含代理规则。
+openUrl: "http://boxjs.com/#/app/iRingo.Siri.beta"
+author: "VirgilClyne"
+homepage: "https://github.com/VirgilClyne"
+manual: "https://github.com/VirgilClyne/iRingo/wiki/⭕-Siri与搜索"
+icon: "https://raw.githubusercontent.com/NSRingo/Siri/main/images/icon/v2/Siri%20-%20Icon%20-%20Color.png"
+category: " iRingo"
+
+rules:
+  - DOMAIN,lookup-api.apple.com,PROXY
+  - DOMAIN,lookup-api.apple.com.edgekey.net,PROXY
+  - DOMAIN,e16991.b.akamaiedge.net,PROXY
+
+http:
+  mitm:
+    - "api*.smoot.apple.com"
+    - "api.smoot.apple.cn"
+  script:
+    - match: ^https?:\/\/api\.smoot\.apple\.(com|cn)\/bag
+      name: Siri.request
+      type: request
+      require-body: false
+      timeout: 5
+      argument:
+    - match: ^https?:\/\/api\.smoot\.apple\.(com|cn)\/bag
+      name: Siri.response
+      type: response
+      require-body: true
+      timeout: 10
+      argument:
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/search
+      name: Siri.request
+      type: request
+      require-body: false
+      timeout: 5
+      argument:
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/search
+      name: Siri.response
+      type: response
+      require-body: true
+      timeout: 10
+      argument:
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/card
+      name: Siri.request
+      type: request
+      require-body: false
+      timeout: 5
+      argument:
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/card
+      name: Siri.response
+      type: request
+      require-body: true
+      timeout: 10
+      argument:
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/warm
+      name: Siri.request
+      type: request
+      require-body: false
+      timeout: 5
+      argument:
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/render
+      name: Siri.request
+      type: request
+      require-body: false
+      timeout: 5
+      argument:
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/flight
+      name: Siri.request
+      type: request
+      require-body: false
+      timeout: 5
+      argument:
+
+script-providers:
+  Siri.request:
+    url: https://raw.githubusercontent.com/NSRingo/Siri/dev/test/request.beta.js
+    interval: 86400
+  Siri.response:
+    url: https://raw.githubusercontent.com/NSRingo/Siri/dev/test/response.beta.js
+    interval: 86400
