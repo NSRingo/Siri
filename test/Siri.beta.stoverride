@@ -5,10 +5,10 @@ desc: |-
   本模块不含自定义「Siri与搜索」中的「询问 Siri」功能。
   注：该覆写包含代理规则。
 openUrl: "http://boxjs.com/#/app/iRingo.Siri.beta"
-author: "VirgilClyne"
-homepage: "https://github.com/VirgilClyne"
-manual: "https://github.com/VirgilClyne/iRingo/wiki/⭕-Siri与搜索"
-icon: "https://raw.githubusercontent.com/NSRingo/Siri/main/images/icon/v2/Siri%20-%20Icon%20-%20Color.png"
+author: "VirgilClyne[https://github.com/VirgilClyne]"
+homepage: "https://github.com/NSRingo"
+manual: "https://github.com/NSRingo/Siri/wiki/⭕-Siri与搜索"
+icon: "https://raw.githubusercontent.com/NSRingo/Siri/main/images/icon/v1/Siri%20-%20Icon.png"
 category: " iRingo"
 
 rules:

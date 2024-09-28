@@ -1,9 +1,9 @@
 #!name= iRingo: ⭕ Siri β
 #!desc=BETA: V2️⃣ & macOS 15⬆️\n全面自定义「Siri」中的「Siri 请求」和「聚焦」中的「Siri 建议」功能
 #!openUrl=http://boxjs.com/#/app/iRingo.Siri.Beta
-#!author=VirgilClyne
-#!homepage=https://github.com/VirgilClyne
-#!manual=https://github.com/VirgilClyne/iRingo/wiki/⭕-Siri
+#!author=VirgilClyne[https://github.com/VirgilClyne]
+#!homepage=https://github.com/NSRingo
+#!manual=https://github.com/NSRingo/Siri/wiki/🟥-Apple智能与Siri
 #!icon=https://raw.githubusercontent.com/NSRingo/Siri/main/images/icon/v2/Siri%20-%20Icon%20-%20Color.png
 #!category= iRingo
 #!system=mac
