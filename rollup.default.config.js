@@ -9,7 +9,7 @@ export default [
 		output: {
 			file: 'dist/request.js',
 			format: 'es',
-			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: ⭕ Siri Request')",
+			banner: `/* README: https://github.com/NSRingo */\nconsole.log(' iRingo: ⭕ Siri Request')\nconsole.log('${new Date().toLocaleString('zh-CN', {timeZone: 'PRC'})}')`,
 		},
 		plugins: [json(), commonjs(), nodeResolve(), terser()]
 	},
@@ -18,7 +18,7 @@ export default [
 		output: {
 			file: 'dist/response.js',
 			format: 'es',
-			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: ⭕ Siri Response')",
+			banner: `/* README: https://github.com/NSRingo */\nconsole.log(' iRingo: ⭕ Siri Response')\nconsole.log('${new Date().toLocaleString('zh-CN', {timeZone: 'PRC'})}')`,
 		},
 		plugins: [json(), commonjs(), nodeResolve(), terser()]
 	}
