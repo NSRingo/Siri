@@ -11173,11 +11173,11 @@ class PegasusSearchQuery$Type extends MessageType {
             { no: 2, name: "queryID", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "asrRank", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ },
             { no: 4, name: "asrScore", kind: "scalar", opt: true, T: 1 /*ScalarType.DOUBLE*/ },
-            { no: 5, name: "asrInterpretation", kind: "message", T: () => AsrInterpretations },
-            { no: 6, name: "asrInterpretations", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => AsrInterpretations },
+            { no: 5, name: "asrInterpretation", kind: "message", T: () => AsrInterpretation },
+            { no: 6, name: "asrInterpretations", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => AsrInterpretation },
             { no: 7, name: "falseTriggerMitigator", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ },
-            { no: 2001, name: "personalSpans", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => PersonalSpans },
-            { no: 2002, name: "profileSlices", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => ProfileSlices }
+            { no: 2001, name: "personalSpans", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => PersonalSpan },
+            { no: 2002, name: "profileSlices", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => ProfileSlice }
         ]);
     }
     create(value) {
@@ -11208,20 +11208,20 @@ class PegasusSearchQuery$Type extends MessageType {
                 case /* optional double asrScore */ 4:
                     message.asrScore = reader.double();
                     break;
-                case /* optional AsrInterpretations asrInterpretation */ 5:
-                    message.asrInterpretation = AsrInterpretations.internalBinaryRead(reader, reader.uint32(), options, message.asrInterpretation);
+                case /* optional AsrInterpretation asrInterpretation */ 5:
+                    message.asrInterpretation = AsrInterpretation.internalBinaryRead(reader, reader.uint32(), options, message.asrInterpretation);
                     break;
-                case /* repeated AsrInterpretations asrInterpretations */ 6:
-                    message.asrInterpretations.push(AsrInterpretations.internalBinaryRead(reader, reader.uint32(), options));
+                case /* repeated AsrInterpretation asrInterpretations */ 6:
+                    message.asrInterpretations.push(AsrInterpretation.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 case /* optional bool falseTriggerMitigator */ 7:
                     message.falseTriggerMitigator = reader.bool();
                     break;
-                case /* repeated PersonalSpans personalSpans */ 2001:
-                    message.personalSpans.push(PersonalSpans.internalBinaryRead(reader, reader.uint32(), options));
+                case /* repeated PersonalSpan personalSpans */ 2001:
+                    message.personalSpans.push(PersonalSpan.internalBinaryRead(reader, reader.uint32(), options));
                     break;
-                case /* repeated ProfileSlices profileSlices */ 2002:
-                    message.profileSlices.push(ProfileSlices.internalBinaryRead(reader, reader.uint32(), options));
+                case /* repeated ProfileSlice profileSlices */ 2002:
+                    message.profileSlices.push(ProfileSlice.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -11247,21 +11247,21 @@ class PegasusSearchQuery$Type extends MessageType {
         /* optional double asrScore = 4; */
         if (message.asrScore !== undefined)
             writer.tag(4, WireType.Bit64).double(message.asrScore);
-        /* optional AsrInterpretations asrInterpretation = 5; */
+        /* optional AsrInterpretation asrInterpretation = 5; */
         if (message.asrInterpretation)
-            AsrInterpretations.internalBinaryWrite(message.asrInterpretation, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
-        /* repeated AsrInterpretations asrInterpretations = 6; */
+            AsrInterpretation.internalBinaryWrite(message.asrInterpretation, writer.tag(5, WireType.LengthDelimited).fork(), options).join();
+        /* repeated AsrInterpretation asrInterpretations = 6; */
         for (let i = 0; i < message.asrInterpretations.length; i++)
-            AsrInterpretations.internalBinaryWrite(message.asrInterpretations[i], writer.tag(6, WireType.LengthDelimited).fork(), options).join();
+            AsrInterpretation.internalBinaryWrite(message.asrInterpretations[i], writer.tag(6, WireType.LengthDelimited).fork(), options).join();
         /* optional bool falseTriggerMitigator = 7; */
         if (message.falseTriggerMitigator !== undefined)
             writer.tag(7, WireType.Varint).bool(message.falseTriggerMitigator);
-        /* repeated PersonalSpans personalSpans = 2001; */
+        /* repeated PersonalSpan personalSpans = 2001; */
         for (let i = 0; i < message.personalSpans.length; i++)
-            PersonalSpans.internalBinaryWrite(message.personalSpans[i], writer.tag(2001, WireType.LengthDelimited).fork(), options).join();
-        /* repeated ProfileSlices profileSlices = 2002; */
+            PersonalSpan.internalBinaryWrite(message.personalSpans[i], writer.tag(2001, WireType.LengthDelimited).fork(), options).join();
+        /* repeated ProfileSlice profileSlices = 2002; */
         for (let i = 0; i < message.profileSlices.length; i++)
-            ProfileSlices.internalBinaryWrite(message.profileSlices[i], writer.tag(2002, WireType.LengthDelimited).fork(), options).join();
+            ProfileSlice.internalBinaryWrite(message.profileSlices[i], writer.tag(2002, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -11273,9 +11273,9 @@ class PegasusSearchQuery$Type extends MessageType {
  */
 const PegasusSearchQuery = new PegasusSearchQuery$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class AsrInterpretations$Type extends MessageType {
+class AsrInterpretation$Type extends MessageType {
     constructor() {
-        super("AsrInterpretations", []);
+        super("AsrInterpretation", []);
     }
     create(value) {
         const message = globalThis.Object.create((this.messagePrototype));
@@ -11294,13 +11294,13 @@ class AsrInterpretations$Type extends MessageType {
     }
 }
 /**
- * @generated MessageType for protobuf message AsrInterpretations
+ * @generated MessageType for protobuf message AsrInterpretation
  */
-const AsrInterpretations = new AsrInterpretations$Type();
+const AsrInterpretation = new AsrInterpretation$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class PersonalSpans$Type extends MessageType {
+class PersonalSpan$Type extends MessageType {
     constructor() {
-        super("PersonalSpans", []);
+        super("PersonalSpan", []);
     }
     create(value) {
         const message = globalThis.Object.create((this.messagePrototype));
@@ -11319,13 +11319,13 @@ class PersonalSpans$Type extends MessageType {
     }
 }
 /**
- * @generated MessageType for protobuf message PersonalSpans
+ * @generated MessageType for protobuf message PersonalSpan
  */
-const PersonalSpans = new PersonalSpans$Type();
+const PersonalSpan = new PersonalSpan$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class ProfileSlices$Type extends MessageType {
+class ProfileSlice$Type extends MessageType {
     constructor() {
-        super("ProfileSlices", [
+        super("ProfileSlice", [
             { no: 2, name: "n2", kind: "message", T: () => U2002N2 }
         ]);
     }
@@ -11365,9 +11365,9 @@ class ProfileSlices$Type extends MessageType {
     }
 }
 /**
- * @generated MessageType for protobuf message ProfileSlices
+ * @generated MessageType for protobuf message ProfileSlice
  */
-const ProfileSlices = new ProfileSlices$Type();
+const ProfileSlice = new ProfileSlice$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class U2002N2$Type extends MessageType {
     constructor() {
@@ -11486,7 +11486,7 @@ class SiriPegasusRequest$Type extends MessageType {
             { no: 8, name: "isDataOnlyRequest", kind: "scalar", opt: true, T: 8 /*ScalarType.BOOL*/ },
             { no: 9, name: "trialIdentifiers", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
             { no: 11, name: "clientConversationContextInfo", kind: "message", T: () => ClientConversationContextInfo },
-            { no: 12, name: "conversationContextBytes", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 12, name: "conversationContextBytes", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => ConversationContextByte },
             { no: 13, name: "requestType", kind: "enum", opt: true, T: () => ["RequestType", RequestType] },
             { no: 14, name: "engagementContext", kind: "message", T: () => EngagementContext },
             { no: 16, name: "visualSearchContext", kind: "message", T: () => VisualSearchContext },
@@ -11499,6 +11499,7 @@ class SiriPegasusRequest$Type extends MessageType {
         const message = globalThis.Object.create((this.messagePrototype));
         message.queries = [];
         message.siriEnvironment = 0;
+        message.conversationContextBytes = [];
         if (value !== undefined)
             reflectionMergePartial(this, message, value);
         return message;
@@ -11538,8 +11539,8 @@ class SiriPegasusRequest$Type extends MessageType {
                 case /* optional ClientConversationContextInfo clientConversationContextInfo */ 11:
                     message.clientConversationContextInfo = ClientConversationContextInfo.internalBinaryRead(reader, reader.uint32(), options, message.clientConversationContextInfo);
                     break;
-                case /* optional string conversationContextBytes */ 12:
-                    message.conversationContextBytes = reader.string();
+                case /* repeated ConversationContextByte conversationContextBytes */ 12:
+                    message.conversationContextBytes.push(ConversationContextByte.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 case /* optional RequestType requestType */ 13:
                     message.requestType = reader.int32();
@@ -11601,9 +11602,9 @@ class SiriPegasusRequest$Type extends MessageType {
         /* optional ClientConversationContextInfo clientConversationContextInfo = 11; */
         if (message.clientConversationContextInfo)
             ClientConversationContextInfo.internalBinaryWrite(message.clientConversationContextInfo, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
-        /* optional string conversationContextBytes = 12; */
-        if (message.conversationContextBytes !== undefined)
-            writer.tag(12, WireType.LengthDelimited).string(message.conversationContextBytes);
+        /* repeated ConversationContextByte conversationContextBytes = 12; */
+        for (let i = 0; i < message.conversationContextBytes.length; i++)
+            ConversationContextByte.internalBinaryWrite(message.conversationContextBytes[i], writer.tag(12, WireType.LengthDelimited).fork(), options).join();
         /* optional RequestType requestType = 13; */
         if (message.requestType !== undefined)
             writer.tag(13, WireType.Varint).int32(message.requestType);
@@ -11632,6 +11633,31 @@ class SiriPegasusRequest$Type extends MessageType {
  * @generated MessageType for protobuf message SiriPegasusRequest
  */
 const SiriPegasusRequest = new SiriPegasusRequest$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class ConversationContextByte$Type extends MessageType {
+    constructor() {
+        super("ConversationContextByte", []);
+    }
+    create(value) {
+        const message = globalThis.Object.create((this.messagePrototype));
+        if (value !== undefined)
+            reflectionMergePartial(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader, length, options, target) {
+        return target ?? this.create();
+    }
+    internalBinaryWrite(message, writer, options) {
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message ConversationContextByte
+ */
+const ConversationContextByte = new ConversationContextByte$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class EngagementContext$Type extends MessageType {
     constructor() {

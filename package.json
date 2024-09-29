@@ -1,9 +1,10 @@
 {
 	"name": "siri",
+	"homepage": "https://github.com/NSRingo/Siri/wiki",
 	"type": "module",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/VirgilClyne/iRingo.git"
+		"url": "https://github.com/NSRingo/Siri.git"
 	},
 	"directories": {
 		"example": "example"

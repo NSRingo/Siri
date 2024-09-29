@@ -4,18 +4,18 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default [
 	{
-		input: 'src/request.beta.js',
+		input: 'src/request.debug.js',
 		output: {
-			file: 'test/request.beta.js',
+			file: 'debug/request.js',
 			//format: 'es',
 			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: ⭕ Siri β Request')",
 		},
 		plugins: [json(), commonjs(), nodeResolve()]
 	},
 	{
-		input: 'src/response.beta.js',
+		input: 'src/response.debug.js',
 		output: {
-			file: 'test/response.beta.js',
+			file: 'debug/response.js',
 			//format: 'es',
 			banner: "/* README: https://github.com/VirgilClyne/iRingo */\nconsole.log(' iRingo: ⭕ Siri β Response')",
 		},
