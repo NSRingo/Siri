@@ -8,15 +8,15 @@ export default function modifyPegasusQueryContext(queryContext, Settings) {
             Settings.CountryCode = CountryCode;
         //break;
         default:
-            if (queryContext?.countryCode) queryContext.countryCode = Settings.CountryCode;
-            //if (data?.siriPegasusContext?.conversationContext?.cc) data.siriPegasusContext.conversationContext.cc = Settings.CountryCode;
+            queryContext.countryCode = Settings.CountryCode;
+            queryContext.region = Settings.CountryCode;
             break;
     };
-    switch (Settings.Region) {
+    switch (Settings.SiriResponseLanguageVariant) {
         case "AUTO":
             break;
         default:
-            if (queryContext?.region) queryContext.region = Settings.Region;
+            queryContext.siriResponseLanguageVariant = Settings.SiriResponseLanguageVariant;
             break;
     };
     if (queryContext?.skuRegion === "CH") queryContext.skuRegion = "LL";

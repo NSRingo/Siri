@@ -1,6 +1,6 @@
 /* README: https://github.com/VirgilClyne/iRingo */
 console.log(' iRingo: ⭕ Siri β Response')
-console.log('2024/9/29 16:13:03')
+console.log('2024/9/29 17:00:59')
 const $platform = platform();
 function platform() {
     if ("undefined" !== typeof $environment && $environment["surge-version"])
@@ -7380,7 +7380,8 @@ var database = {
 			"Region": "AUTO",
 			"Domains": ["web", "itunes", "app_store", "movies", "restaurants", "maps"],
 			"Functions": ["flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
-			"Safari_Smart_History": true
+			"Safari_Smart_History": true,
+			"SiriResponseLanguageVariant": "zh_CN"
 		},
 		"Configs": {
 			"VisualIntelligence": {
