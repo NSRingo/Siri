@@ -4,7 +4,7 @@
 #!author=VirgilClyne[https://github.com/VirgilClyne]
 #!homepage=https://github.com/NSRingo
 #!manual=https://github.com/NSRingo/Siri/wiki/🟥-Apple智能与Siri
-#!icon=https://raw.githubusercontent.com/NSRingo/Siri/main/images/icon/v2/Siri%20-%20Icon%20-%20Color.png
+#!icon=https://developer.apple.com/assets/elements/icons/siri/siri-128x128.png
 #!category= iRingo
 #!system=mac
 #!arguments=CountryCode: US,Proxy: 🌑Proxy
