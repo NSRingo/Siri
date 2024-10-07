@@ -1,6 +1,6 @@
-/* README: https://github.com/VirgilClyne/iRingo */
+/* README: https://github.com/NSRingo */
 console.log(' iRingo: ⭕ Siri β Response')
-console.log('2024/9/29 17:54:51')
+console.log('2024/10/8 19:48:05')
 const $platform = platform();
 function platform() {
     if ("undefined" !== typeof $environment && $environment["surge-version"])
@@ -7482,7 +7482,6 @@ function setENV(name, platforms, database) {
 	return { Settings, Caches, Configs };
 }
 
-log("v4.0.4(4005)");
 /***************** Processing *****************/
 // 解构URL
 const url = new URL($request.url);

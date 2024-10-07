@@ -2,7 +2,6 @@ import { $platform, URL, _, Storage, fetch, notification, log, logError, wait, d
 import GRPC from "./utils/GRPC.mjs";
 import database from "./function/database.mjs";
 import setENV from "./function/setENV.mjs";
-log("v4.0.4(4005)");
 /***************** Processing *****************/
 // 解构URL
 const url = new URL($request.url);
