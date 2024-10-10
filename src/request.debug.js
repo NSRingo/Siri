@@ -107,51 +107,54 @@ log(`⚠ FORMAT: ${FORMAT}`, "");
 													log(`🚧 body: ${JSON.stringify(body)}`, "");
 													body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
 													let fixLocation = true;
-													const utterance = body?.queries?.[0]?.utterance ?? "";
+													const utterance = (body?.queries?.[0]?.utterance ?? "").toLowerCase();
 													switch (true) {
-														case utterance.includes("什么是") || utterance.includes("是什么") || utterance.includes(" what's ") || utterance.includes(" what is ") || utterance.includes(" what does ") || utterance.includes(" what do "):
-														case utterance.includes("怎么样") || utterance.includes("怎样") || utterance.includes("如何") || utterance.includes(" how's ") || utterance.includes(" how is ") || utterance.includes(" how does ") || utterance.includes(" how do "):
-														case utterance.includes("为什么") || utterance.includes(" why ") || utterance.includes(" why is ") || utterance.includes(" why does "):
-														case utterance.includes("搜索") || utterance.includes(" search "):
-														case utterance.includes(" mean ") || utterance.includes(" explain ") || utterance.includes(" look up ") || utterance.includes(" translate") || (utterance.includes(" in ") && !utterance.includes(" here")) || utterance.includes(" web ") || utterance.includes(" internet ") || utterance.includes(" define ") || utterance.includes(" wikipedia ") || utterance.includes("解释") || utterance.includes("翻译") || utterance.includes("怎么说") || utterance.includes("意思"):
+														case utterance.includes("什么是") || utterance.includes("是什么") || utterance.includes("what's ") || utterance.includes("what is ") || utterance.includes("what does ") || utterance.includes("what do "):
+														case utterance.includes("怎么样") || utterance.includes("怎样") || utterance.includes("如何") || utterance.includes("how's ") || utterance.includes("how is ") || utterance.includes("how does ") || utterance.includes("how do "):
+														case utterance.includes("为什么") || utterance.includes("why ") || utterance.includes("why is ") || utterance.includes("why does "):
+														case utterance.includes("搜索") || utterance.includes("search "):
+														case utterance.includes(" mean") || utterance.includes("meaning") || utterance.includes("explain") || utterance.includes("look up ") || utterance.includes("translat") || (utterance.includes(" in ") && !utterance.includes(" here")) || utterance.includes("web") || utterance.includes(" internet") || utterance.includes("defin") || utterance.includes(" wikipedia") || utterance.includes("解释") || utterance.includes("翻译") || utterance.includes("怎么说") || utterance.includes("意思"):
 															fixLocation = true;
 															break;
-														case utterance.includes("何时") || utterance.includes("几时") || utterance.includes(" when "):
-														case utterance.includes("什么时") || utterance.includes("几点") || utterance.includes(" what time "):
-														case utterance.includes("哪里") || utterance.includes("哪儿") || utterance.includes("何处") || utterance.includes(" where "):
-														case utterance.includes("哪个") || utterance.includes("哪一个") || utterance.includes(" which "):
+														/*
+														case utterance.includes("何时") || utterance.includes("几时") || utterance.includes("when "):
+														case utterance.includes("什么时") || utterance.includes("几点") || utterance.includes("what time "):
+														case utterance.includes("哪里") || utterance.includes("哪儿") || utterance.includes("何处") || utterance.includes("where "):
+														case utterance.includes("哪个") || utterance.includes("哪一个") || utterance.includes("which "):
+															// 反例："When was the first plane invented?", "Where was Steve Jobs born?", etc.
 															fixLocation = false;
 															break;
-														case utterance.includes("气压") || utterance.includes(" air pressure ") || utterance.includes(" barometric pressure ") || utterance.includes(" atmospheric pressure ") || utterance.includes(" atmosphere pressure "):
-														case utterance.includes("湿度") || utterance.includes(" humidity "):
-														case utterance.includes("温度") || utterance.includes(" temperature "):
-														case utterance.includes("风速") || utterance.includes(" wind speed "):
-														case utterance.includes("风向") || utterance.includes(" wind direction "):
-														case utterance.includes("空气质量") || utterance.includes(" air quality "):
-														case utterance.includes("月相") || utterance.includes(" moon phase "):
-														case utterance.includes("紫外线") || utterance.includes(" uv index ") || utterance.includes("ultraviolet index outside"):
-														case utterance.includes("能见度") || utterance.includes(" visibility "):
-														case utterance.includes("日出") || utterance.includes(" sunrise "):
-														case utterance.includes("日落") || utterance.includes(" sunset "):
+														*/
+														case utterance.includes("气压") || utterance.includes("air pressure") || utterance.includes("barometric pressure") || utterance.includes("atmospheric pressure") || utterance.includes("atmosphere pressure"):
+														case utterance.includes("湿度") || utterance.includes("humidity"):
+														case utterance.includes("温度") || utterance.includes("temperature"):
+														case utterance.includes("风速") || utterance.includes("wind speed"):
+														case utterance.includes("风向") || utterance.includes("wind direction"):
+														case utterance.includes("空气质量") || utterance.includes("air quality"):
+														case utterance.includes("月相") || (utterance.includes("moon") && utterance.includes("phase")):
+														case utterance.includes("紫外线") || utterance.includes("uv index") || utterance.includes("ultraviolet index outside"):
+														case utterance.includes("能见度") || utterance.includes("visibility"):
+														case utterance.includes("日出") || utterance.includes("sunrise"):
+														case utterance.includes("日落") || utterance.includes("sunset"):
 														case (utterance.includes("sun ") && (utterance.includes("rise") || utterance.includes("set") || utterance.includes("fall"))) || utterance.includes("sunrise") || utterance.includes("sunset"):
 														case (utterance.includes("太阳") && (utterance.includes("升") || utterance.includes("落") || utterance.includes("下山"))) || utterance.includes("日出") || utterance.includes("日落"):
-														case (utterance.includes(" is ") || utterance.includes(" it ")) && (utterance.includes("rain") || utterance.includes("shin") || utterance.includes("sunny") || utterance.includes("hot") || utterance.includes("cold") || utterance.includes("freeze") || utterance.includes("warm") || utterance.includes("wind") || utterance.includes("fog") || utterance.includes("haz") || utterance.includes("thunder") || utterance.includes("storm") || utterance.includes("lightn") || utterance.includes("snow") || utterance.includes("hail") || utterance.includes("clear") || utterance.includes("tornado") || utterance.includes("hurricane")):
+														case (utterance.includes("is it") || utterance.includes("it is") || utterance.includes("it\'s")) && (utterance.includes("humid") || utterance.includes("rain") || utterance.includes("shin") || utterance.includes("sunny") || utterance.includes("hot") || utterance.includes("cold") || utterance.includes("freez") || utterance.includes("warm") || utterance.includes("wind") || utterance.includes("fog") || utterance.includes("haz") || utterance.includes("thunder") || utterance.includes("storm") || utterance.includes("lightn") || utterance.includes("snow") || utterance.includes("hail") || utterance.includes("clear") || utterance.includes("tornado") || utterance.includes("hurricane")):
 														case (utterance.includes("有") || utterance.includes("会") || utterance.includes("吗")) && (utterance.includes("下雨") || utterance.includes("晒") || utterance.includes("晴") || utterance.includes("热") || utterance.includes("冷") || utterance.includes("暖") || utterance.includes("风") || utterance.includes("雾") || utterance.includes("霾") || utterance.includes("雷") || utterance.includes("风暴") || utterance.includes("电") || utterance.includes("雪") || utterance.includes("雹")):
-														case utterance.includes(" precipitation ") || utterance.includes(" forecast ") || ((utterance.includes(" chance ") || utterance.includes(" possibilit")) && utterance.includes(" rain ")):
+														case utterance.includes("precipitation") || utterance.includes("forecast") || ((utterance.includes("chance") || utterance.includes("possibilit")) && (utterance.includes(" rain") || utterance.includes(" snow"))):
 														case utterance.includes("降雪") || utterance.includes("降水") || utterance.includes("预报") || ((utterance.includes("概率") || utterance.includes("几率")) && (utterance.includes("降水") || utterance.includes("降雪"))):
 															fixLocation = false;
 															break;
-														case utterance.includes("附近") || utterance.includes(" nearby "):
-														case utterance.includes("周围") || utterance.includes(" around me ") || utterance.includes(" around here "):
-														case utterance.includes("导航") || utterance.includes(" navigation to "):
-														case utterance.includes("方向") || utterance.includes(" direction "):
-														case utterance.includes("指引") || (utterance.includes(" direct ") && utterance.includes(" to ")):
-														case utterance.includes("指引") || (utterance.includes(" guide ") && utterance.includes(" to ")):
-														case utterance.includes("带我去") || (utterance.includes(" take ") && utterance.includes(" to ")):
-														case utterance.includes("路线") || utterance.includes(" route "):
-														case utterance.includes("路径") || utterance.includes(" path to "):
-														case (utterance.includes("怎样") || utterance.includes("如何")) && (utterance.includes("到") || utterance.includes("去") || utterance.includes("抵达")):
-														case utterance.includes(" how ") && (utterance.includes(" get ") || utterance.includes(" go ") || utterance.includes(" arrive ") || utterance.includes(" reach ")):
+														case utterance.includes("附近") || utterance.includes(" nearby"):
+														case utterance.includes("周围") || utterance.includes(" around me") || utterance.includes(" around here"):
+														case utterance.includes("导航") || utterance.includes("navigat"):
+														case utterance.includes("方向") || utterance.includes(" direction"):
+														case utterance.includes("指引") || (utterance.includes("direct ") && utterance.includes(" to ")):
+														case utterance.includes("指引") || (utterance.includes("guide ") && utterance.includes(" to ")):
+														case utterance.includes("带我去") || utterance.includes("take me to "):
+														case utterance.includes("路线") || utterance.includes("route "):
+														case utterance.includes("路径") || utterance.includes("path to "):
+														case (utterance.includes("怎样") || utterance.includes("如何") || utterance.includes("怎么")) && (utterance.includes("到") || utterance.includes("去") || utterance.includes("抵达") || utterance.includes("走")):
+														case utterance.includes("how ") && (utterance.includes(" get ") || utterance.includes(" go ") || utterance.includes(" arrive ") || utterance.includes(" reach ")):
 															fixLocation = false;
 															break;
 													};
