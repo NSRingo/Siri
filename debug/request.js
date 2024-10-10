@@ -1,6 +1,6 @@
 /* README: https://github.com/NSRingo */
 console.log(' iRingo: ⭕ Siri β Request')
-console.log('2024/10/8 19:48:05')
+console.log('2024/10/10 22:33:20')
 const $platform = platform();
 function platform() {
     if ("undefined" !== typeof $environment && $environment["surge-version"])
@@ -11625,18 +11625,56 @@ const Token = new Token$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class PersonalSpan$Type extends MessageType {
     constructor() {
-        super("PersonalSpan", []);
+        super("PersonalSpan", [
+            { no: 1, name: "label", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 2, name: "begin", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 3, name: "end", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
+        ]);
     }
     create(value) {
         const message = globalThis.Object.create((this.messagePrototype));
+        message.label = 0;
+        message.begin = 0;
+        message.end = 0;
         if (value !== undefined)
             reflectionMergePartial(this, message, value);
         return message;
     }
     internalBinaryRead(reader, length, options, target) {
-        return target ?? this.create();
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* uint32 label */ 1:
+                    message.label = reader.uint32();
+                    break;
+                case /* uint32 begin */ 2:
+                    message.begin = reader.uint32();
+                    break;
+                case /* uint32 end */ 3:
+                    message.end = reader.uint32();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
     }
     internalBinaryWrite(message, writer, options) {
+        /* uint32 label = 1; */
+        if (message.label !== 0)
+            writer.tag(1, WireType.Varint).uint32(message.label);
+        /* uint32 begin = 2; */
+        if (message.begin !== 0)
+            writer.tag(2, WireType.Varint).uint32(message.begin);
+        /* uint32 end = 3; */
+        if (message.end !== 0)
+            writer.tag(3, WireType.Varint).uint32(message.end);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -11651,11 +11689,14 @@ const PersonalSpan = new PersonalSpan$Type();
 class ProfileSlice$Type extends MessageType {
     constructor() {
         super("ProfileSlice", [
-            { no: 2, name: "n2", kind: "message", T: () => U2002N2 }
+            { no: 1, name: "label", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 2, name: "values", kind: "message", repeat: 1 /*RepeatType.PACKED*/, T: () => Value }
         ]);
     }
     create(value) {
         const message = globalThis.Object.create((this.messagePrototype));
+        message.label = 0;
+        message.values = [];
         if (value !== undefined)
             reflectionMergePartial(this, message, value);
         return message;
@@ -11665,8 +11706,11 @@ class ProfileSlice$Type extends MessageType {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* U2002N2 n2 */ 2:
-                    message.n2 = U2002N2.internalBinaryRead(reader, reader.uint32(), options, message.n2);
+                case /* uint32 label */ 1:
+                    message.label = reader.uint32();
+                    break;
+                case /* repeated Value values */ 2:
+                    message.values.push(Value.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -11680,9 +11724,12 @@ class ProfileSlice$Type extends MessageType {
         return message;
     }
     internalBinaryWrite(message, writer, options) {
-        /* U2002N2 n2 = 2; */
-        if (message.n2)
-            U2002N2.internalBinaryWrite(message.n2, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* uint32 label = 1; */
+        if (message.label !== 0)
+            writer.tag(1, WireType.Varint).uint32(message.label);
+        /* repeated Value values = 2; */
+        for (let i = 0; i < message.values.length; i++)
+            Value.internalBinaryWrite(message.values[i], writer.tag(2, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -11694,18 +11741,18 @@ class ProfileSlice$Type extends MessageType {
  */
 const ProfileSlice = new ProfileSlice$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class U2002N2$Type extends MessageType {
+class Value$Type extends MessageType {
     constructor() {
-        super("U2002N2", [
-            { no: 1, name: "unknown1", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
-            { no: 2, name: "supplement", kind: "message", T: () => Any },
-            { no: 3, name: "unknown3", kind: "scalar", T: 5 /*ScalarType.INT32*/ }
+        super("Value", [
+            { no: 1, name: "label", kind: "scalar", T: 13 /*ScalarType.UINT32*/ },
+            { no: 2, name: "value", kind: "message", T: () => Any },
+            { no: 3, name: "state", kind: "scalar", T: 13 /*ScalarType.UINT32*/ }
         ]);
     }
     create(value) {
         const message = globalThis.Object.create((this.messagePrototype));
-        message.unknown1 = 0;
-        message.unknown3 = 0;
+        message.label = 0;
+        message.state = 0;
         if (value !== undefined)
             reflectionMergePartial(this, message, value);
         return message;
@@ -11715,14 +11762,14 @@ class U2002N2$Type extends MessageType {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* int32 unknown1 */ 1:
-                    message.unknown1 = reader.int32();
+                case /* uint32 label */ 1:
+                    message.label = reader.uint32();
                     break;
-                case /* google.protobuf.Any supplement */ 2:
-                    message.supplement = Any.internalBinaryRead(reader, reader.uint32(), options, message.supplement);
+                case /* google.protobuf.Any value */ 2:
+                    message.value = Any.internalBinaryRead(reader, reader.uint32(), options, message.value);
                     break;
-                case /* int32 unknown3 */ 3:
-                    message.unknown3 = reader.int32();
+                case /* uint32 state */ 3:
+                    message.state = reader.uint32();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -11736,15 +11783,15 @@ class U2002N2$Type extends MessageType {
         return message;
     }
     internalBinaryWrite(message, writer, options) {
-        /* int32 unknown1 = 1; */
-        if (message.unknown1 !== 0)
-            writer.tag(1, WireType.Varint).int32(message.unknown1);
-        /* google.protobuf.Any supplement = 2; */
-        if (message.supplement)
-            Any.internalBinaryWrite(message.supplement, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* int32 unknown3 = 3; */
-        if (message.unknown3 !== 0)
-            writer.tag(3, WireType.Varint).int32(message.unknown3);
+        /* uint32 label = 1; */
+        if (message.label !== 0)
+            writer.tag(1, WireType.Varint).uint32(message.label);
+        /* google.protobuf.Any value = 2; */
+        if (message.value)
+            Any.internalBinaryWrite(message.value, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* uint32 state = 3; */
+        if (message.state !== 0)
+            writer.tag(3, WireType.Varint).uint32(message.state);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -11752,9 +11799,9 @@ class U2002N2$Type extends MessageType {
     }
 }
 /**
- * @generated MessageType for protobuf message U2002N2
+ * @generated MessageType for protobuf message Value
  */
-const U2002N2 = new U2002N2$Type();
+const Value = new Value$Type();
 
 // @generated by protobuf-ts 2.9.4 with parameter generate_dependencies,long_type_number,output_javascript
 // @generated from protobuf file "apple/parsec/siri/v2alpha/SiriPegasusRequest.proto" (syntax proto3)
