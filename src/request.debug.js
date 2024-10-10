@@ -156,7 +156,7 @@ log(`⚠ FORMAT: ${FORMAT}`, "");
 															break;
 													};
 													body?.queries?.[0]?.profileSlices.forEach((profileSlice, index) => {
-														switch (profileSlice?.n2?.supplement?.typeUrl) {
+														switch (profileSlice?.values?.[0]?.value?.typeUrl) {
 															case "type.googleapis.com/apple.parsec.siri.v2alpha.AppInfo":
 																/******************  initialization start  *******************/
 																class ApplicationInfomationRequest$Type extends MessageType {
@@ -169,7 +169,7 @@ log(`⚠ FORMAT: ${FORMAT}`, "");
 																}
 																const ApplicationInfomationRequest = new ApplicationInfomationRequest$Type();
 																/******************  initialization finish  *******************/
-																const AppInfo = ApplicationInfomationRequest.fromBinary(profileSlice?.n2?.supplement?.value);
+																const AppInfo = ApplicationInfomationRequest.fromBinary(profileSlice?.values?.[0]?.value?.value);
 																log(`🚧 AppInfo: ${JSON.stringify(AppInfo)}`, "");
 																switch (AppInfo?.bundleID) {
 																	case "com.apple.weather":

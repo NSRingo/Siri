@@ -1,6 +1,6 @@
 /* README: https://github.com/NSRingo */
 console.log(' iRingo: ⭕ Siri β Request')
-console.log('2024/10/10 22:33:20')
+console.log('2024/10/10 22:44:45')
 const $platform = platform();
 function platform() {
     if ("undefined" !== typeof $environment && $environment["surge-version"])
@@ -12513,7 +12513,7 @@ log(`⚠ FORMAT: ${FORMAT}`, "");
 															fixLocation = false;
 															break;
 													}													body?.queries?.[0]?.profileSlices.forEach((profileSlice, index) => {
-														switch (profileSlice?.n2?.supplement?.typeUrl) {
+														switch (profileSlice?.values?.[0]?.value?.typeUrl) {
 															case "type.googleapis.com/apple.parsec.siri.v2alpha.AppInfo":
 																/******************  initialization start  *******************/
 																class ApplicationInfomationRequest$Type extends MessageType {
@@ -12526,7 +12526,7 @@ log(`⚠ FORMAT: ${FORMAT}`, "");
 																}
 																const ApplicationInfomationRequest = new ApplicationInfomationRequest$Type();
 																/******************  initialization finish  *******************/
-																const AppInfo = ApplicationInfomationRequest.fromBinary(profileSlice?.n2?.supplement?.value);
+																const AppInfo = ApplicationInfomationRequest.fromBinary(profileSlice?.values?.[0]?.value?.value);
 																log(`🚧 AppInfo: ${JSON.stringify(AppInfo)}`, "");
 																switch (AppInfo?.bundleID) {
 																	case "com.apple.weather":
