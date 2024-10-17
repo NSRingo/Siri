@@ -78,8 +78,8 @@ http:
 
 script-providers:
   Siri.request:
-    url: https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/request.js
+    url: https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/request.bundle.js
     interval: 86400
   Siri.response:
-    url: https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/response.js
+    url: https://raw.githubusercontent.com/NSRingo/Siri/dev/debug/response.bundle.js
     interval: 86400

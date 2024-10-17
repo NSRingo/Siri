@@ -4,10 +4,10 @@ import database from "./function/database.mjs";
 import setENV from "./function/setENV.mjs";
 import modifyPegasusQueryContext from "./function/modifyPegasusQueryContext.mjs";
 import { MESSAGE_TYPE, reflectionMergePartial, BinaryReader, WireType, UnknownFieldHandler, isJsonObject, typeofJsonValue, jsonWriteOptions, MessageType } from "@protobuf-ts/runtime";
-import { SiriPegasusRequest } from "./proto/apple/parsec/siri/v2alpha/SiriPegasusRequest";
-import { LookupSearchRequest } from "./proto/apple/parsec/lookup/v1alpha/LookupSearchRequest";
-import { VisualSearchRequest } from "./proto/apple/parsec/visualsearch/v2/VisualSearchRequest";
-import { PegasusQueryContext } from "./proto/apple/parsec/search/PegasusQueryContext";
+import { SiriPegasusRequest } from "./proto/apple/parsec/siri/v2alpha/SiriPegasusRequest.js";
+import { LookupSearchRequest } from "./proto/apple/parsec/lookup/v1alpha/LookupSearchRequest.js";
+import { VisualSearchRequest } from "./proto/apple/parsec/visualsearch/v2/VisualSearchRequest.js";
+import { PegasusQueryContext } from "./proto/apple/parsec/search/PegasusQueryContext.js";
 // 构造回复数据
 let $response = undefined;
 /***************** Processing *****************/
