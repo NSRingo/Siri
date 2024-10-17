@@ -12372,8 +12372,8 @@ __webpack_require__.d(__webpack_exports__, {
 });
 function modifyPegasusQueryContext(queryContext, Settings) {
     console.log(`☑️ modify PegasusQueryContext`, "");
-    Locale = queryContext.locale;
-    [Language, CountryCode] = Locale?.split("_") ?? [];
+    const Locale = queryContext.locale;
+    const [Language, CountryCode] = Locale?.split("_") ?? [];
     console.log(`🚧 Locale: ${Locale}, Language: ${Language}, CountryCode: ${CountryCode}`);
     switch (Settings.CountryCode) {
         case "AUTO":
