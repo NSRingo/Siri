@@ -48,8 +48,8 @@ http:
 
 script-providers:
   Siri.request:
-    url: https://github.com/NSRingo/Siri/releases/download/v4.1.0/request.bundle.js
+    url: https://github.com/NSRingo/Siri/releases/latest/download/request.bundle.js
     interval: 86400
   Siri.response:
-    url: https://github.com/NSRingo/Siri/releases/download/v4.1.0/response.bundle.js
+    url: https://github.com/NSRingo/Siri/releases/latest/download/response.bundle.js
     interval: 86400

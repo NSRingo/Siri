@@ -11,8 +11,22 @@ Console.info(`PATHs: ${PATHs}`);
 // 解析格式
 const FORMAT = ($response.headers?.["Content-Type"] ?? $response.headers?.["content-type"])?.split(";")?.[0];
 Console.info(`FORMAT: ${FORMAT}`);
+const PLATFORM = [];
+switch (url.hostname) {
+	case "api.smoot.apple.cn":
+	case "api.smoot.apple.com":
+	case "api2.smoot.apple.com":
+	default:
+		PLATFORM.push("Spotlight");
+		break;
+	case "guzzoni.smoot.apple.com":
+	case "api-siri.smoot.apple.com":
+		PLATFORM.push("Siri");
+		break;
+}
+Console.info(`PLATFORM: ${PLATFORM}`);
 (async () => {
-	const { Settings, Caches, Configs } = setENV("iRingo", "Spotlight", database);
+	const { Settings, Caches, Configs } = setENV("iRingo", PLATFORM, database);
 	Console.logLevel = Settings.LogLevel;
 	// 创建空数据
 	let body = {};

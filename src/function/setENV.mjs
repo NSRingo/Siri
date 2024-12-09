@@ -12,7 +12,7 @@ export default function setENV(name, platforms, database) {
 	Console.log("☑️ Set Environment Variables");
 	const { Settings, Caches, Configs } = getStorage(name, platforms, database);
 	/***************** Settings *****************/
-	switch (platforms) {
+	switch (platforms.toString()) {
 		case "Siri":
 			break;
 		case "Spotlight":
@@ -20,7 +20,7 @@ export default function setENV(name, platforms, database) {
 			if (!Array.isArray(Settings?.Functions)) _.set(Settings, "Functions", Settings?.Functions ? [Settings.Functions.toString()] : []);
 			break;
 	}
-	Console.log(`typeof Settings: ${typeof Settings}`, `Settings: ${JSON.stringify(Settings, null, 2)}`);
+	Console.info(`typeof Settings: ${typeof Settings}`, `Settings: ${JSON.stringify(Settings, null, 2)}`);
 	/***************** Caches *****************/
 	//Console.log(`typeof Caches: ${typeof Caches}`, `Caches: ${JSON.stringify(Caches)}`);
 	/***************** Configs *****************/

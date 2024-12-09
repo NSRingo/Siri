@@ -31,5 +31,6 @@ export default defineConfig({
 			banner: "https://NSRingo.github.io",
 		}),
 	],
+	devtool: false,
 	performance: false,
 });
