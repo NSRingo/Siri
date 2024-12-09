@@ -1,9 +1,12 @@
+import { Console } from "@nsnanocat/util";
+
 export default function modifyPegasusQueryContext(queryContext, Settings) {
-    console.log(`☑️ modify PegasusQueryContext`, "");
+    Console.log("☑️ modify PegasusQueryContext");
     const Locale = queryContext.locale;
     const [Language, CountryCode] = Locale?.split("_") ?? [];
-    console.log(`🚧 Locale: ${Locale}, Language: ${Language}, CountryCode: ${CountryCode}`);
+    Console.info(`Locale: ${Locale}`, `Language: ${Language}`, `CountryCode: ${CountryCode}`);
     switch (Settings.CountryCode) {
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: <explanation>
         case "AUTO":
             Settings.CountryCode = CountryCode;
         //break;
@@ -21,6 +24,6 @@ export default function modifyPegasusQueryContext(queryContext, Settings) {
     };
     if (queryContext?.skuRegion === "CH") queryContext.skuRegion = "LL";
     //delete queryContext?.location;
-    console.log(`✅ modify PegasusQueryContext`, "");
+    Console.log("✅ modify PegasusQueryContext");
     return queryContext;
 };

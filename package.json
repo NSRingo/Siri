@@ -1,6 +1,22 @@
 {
-	"name": "siri",
-	"homepage": "https://github.com/NSRingo/Siri/wiki",
+	"name": "@iringo/siri",
+	"organizationName": " iRingo",
+	"displayName": " iRingo: ⭕ Siri",
+	"description": "",
+	"homepage": "https://NSRingo.github.io/guide/Siri/siri-and-search",
+	"openUrl": "http://boxjs.com/#/app/iRingo.Siri",
+	"icon": "https://raw.githubusercontent.com/NSRingo/Siri/main/images/icon/v1/Siri%20-%20Icon.png",
+	"keywords": [],
+	"contributors": [
+		"VirgilClyne[https://github.com/VirgilClyne]"
+	],
+	"system": [
+		"iOS",
+		"iPadOS",
+		"macOS"
+	],
+	"systemVersion": 15,
+	"license": "Apache-2.0",
 	"type": "module",
 	"repository": {
 		"type": "git",
@@ -12,21 +28,23 @@
 	"scripts": {
 		"serve": "webpack serve",
 		"build": "rspack build",
-		"build:dev": "rspack build -c rspack.debug.config.js --mode=development",
-		"build:debug": "rollup --config --configDebug"
+		"build:dev": "rspack build -c rspack.dev.config.js --mode=development",
+		"build:args": "arguments-builder build",
+		"dts": "arguments-builder dts"
 	},
 	"browserslist": [
 		"iOS >= 15"
 	],
-	"keywords": [],
-	"author": "VirgilClyne",
-	"license": "Apache-2.0",
 	"devDependencies": {
+		"@iringo/arguments-builder": "^1.8.5",
 		"@protobuf-ts/plugin": "^2.9.4",
-		"@protobuf-ts/runtime": "^2.9.3",
 		"@rspack/cli": "^1.0.13",
 		"@rspack/core": "^1.0.13",
-		"node-polyfill-webpack-plugin": "^4.0.0",
+		"node-polyfill-webpack-plugin": "^4.1.0"
+	},
+	"dependencies": {
+		"@nsnanocat/util": "^1.7.5",
+		"@protobuf-ts/runtime": "^2.9.3",
 		"pako": "^2.1.0"
 	}
 }

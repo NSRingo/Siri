@@ -1,4 +1,4 @@
-import { log } from "../utils/utils.mjs";
+import { Console } from "@nsnanocat/util";
 //import { MESSAGE_TYPE, reflectionMergePartial, BinaryReader, WireType, UnknownFieldHandler, isJsonObject, typeofJsonValue, jsonWriteOptions, MessageType } from "@protobuf-ts/runtime";
 import { SiriPegasusRequest } from "../proto/apple/parsec/siri/v2alpha/SiriPegasusRequest";
 import { SiriPegasusContext } from "../proto/apple/parsec/siri/v2alpha/SiriPegasusContext";
@@ -8,7 +8,7 @@ export default class PegasusAPI {
     static Version = "1.0.1";
 	static Author = "VirgilClyne";
     static decode(rawBody = new Uint8Array([]), message = "SiriPegasusRequest") {
-        log("☑️ PegasusAPI.decode", "");
+        Console.log("☑️ PegasusAPI.decode");
         let body = {};
         switch (message) {
             case "SiriPegasusRequest":
@@ -23,11 +23,11 @@ export default class PegasusAPI {
             default:
                 throw new Error(`Unknown message type: ${message}`);
         };
-        log("✅ PegasusAPI.decode", "");
+        Console.log("✅ PegasusAPI.decode");
         return body;
     };
     static encode(body = {}, message = "SiriPegasusRequest") {
-        log("☑️ PegasusAPI.encode", "");
+        Console.log("☑️ PegasusAPI.encode");
         let rawBody = new Uint8Array([]);
         switch (message) {
             case "SiriPegasusRequest":
@@ -42,7 +42,7 @@ export default class PegasusAPI {
             default:
                 throw new Error(`Unknown message type: ${message}`);
         };
-        log("✅ PegasusAPI.encode", "");
+        Console.log("✅ PegasusAPI.encode");
         return rawBody;
     };
 }

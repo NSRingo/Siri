@@ -1,4 +1,4 @@
-import { Console, done, Lodash as _ } from "@nsnanocat/util";
+import { $app, Console, done, gRPC, Lodash as _ } from "@nsnanocat/util";
 import database from "./function/database.mjs";
 import setENV from "./function/setENV.mjs";
 /***************** Processing *****************/
@@ -28,6 +28,9 @@ Console.info(`FORMAT: ${FORMAT}`);
 		case "application/x-mpegurl":
 		case "application/vnd.apple.mpegurl":
 		case "audio/mpegurl":
+			//body = M3U8.parse($response.body);
+			//Console.debug(`body: ${JSON.stringify(body)}`);
+			//$response.body = M3U8.stringify(body);
 			break;
 		case "text/xml":
 		case "text/html":
@@ -35,9 +38,14 @@ Console.info(`FORMAT: ${FORMAT}`);
 		case "application/xml":
 		case "application/plist":
 		case "application/x-plist":
+			//body = XML.parse($response.body);
+			//Console.debug(`body: ${JSON.stringify(body)}`);
 			break;
 		case "text/vtt":
 		case "application/vtt":
+			//body = VTT.parse($response.body);
+			//Console.debug(`body: ${JSON.stringify(body)}`);
+			//$response.body = VTT.stringify(body);
 			break;
 		case "text/json":
 		case "application/json":
@@ -52,6 +60,8 @@ Console.info(`FORMAT: ${FORMAT}`);
 							// 配置
 							body.enabled = true;
 							body.feedback_enabled = true;
+							//body.search_url = body?.search_url || "https:\/\/api-glb-apne1c.smoot.apple.com\/search";
+							//body.feedback_url = body?.feedback_url || "https:\/\/fbs.smoot.apple.com\/fb";
 							if (body?.enabled_domains) {
 								body.enabled_domains = [...new Set([...(body?.enabled_domains ?? []), ...Settings.Domains])];
 								Console.info("领域列表", `enabled_domains: ${JSON.stringify(body.enabled_domains)}`);
@@ -117,6 +127,22 @@ Console.info(`FORMAT: ${FORMAT}`);
 							// Safari Smart History
 							body.safari_smart_history_enabled = Settings.SafariSmartHistory;
 							body.smart_history_feature_feedback_enabled = Settings.SafariSmartHistory;
+							/*
+									if (body?.mescal_enabled) {
+										body.mescal_enabled = true;
+										body.mescal_version = 200;
+										body.mescal_cert_url = "https://init.itunes.apple.com/WebObjects/MZInit.woa/wa/signSapSetupCert";
+										body.mescal_setup_url = "https://play.itunes.apple.com/WebObjects/MZPlay.woa/wa/signSapSetup";
+									}
+									let smart_search_v2 = body?.smart_search_v2_parameters;
+									if (smart_search_v2) {
+										smart_search_v2.smart_history_score_v2_enabled = true;
+										smart_search_v2.smart_history_score_v2_enable_count = true;
+									};
+									body.session_experiment_metadata_enabled = true;
+									//body.sample_features = true;
+									//body.use_ledbelly = true;
+									*/
 							break;
 						}
 					}
@@ -147,6 +173,44 @@ Console.info(`FORMAT: ${FORMAT}`);
 		case "application/grpc":
 		case "application/grpc+proto":
 		case "application/octet-stream": {
+			//Console.debug(`$response.body: ${JSON.stringify($response.body)}`);
+			let rawBody = $app === "Quantumult X" ? new Uint8Array($response.bodyBytes ?? []) : ($response.body ?? new Uint8Array());
+			//Console.debug(`isBuffer? ${ArrayBuffer.isView(rawBody)}: ${JSON.stringify(rawBody)}`);
+			switch (FORMAT) {
+				case "application/protobuf":
+				case "application/x-protobuf":
+				case "application/vnd.google.protobuf":
+					break;
+				case "application/grpc":
+				case "application/grpc+proto":
+					rawBody = gRPC.decode(rawBody);
+					// 解析链接并处理protobuf数据
+					// 主机判断
+					switch (url.hostname) {
+						case "guzzoni.smoot.apple.com":
+							// 路径判断
+							switch (url.pathname) {
+								case "/apple.parsec.siri.v2alpha.SiriSearch/SiriSearch": // Siri搜索
+									/******************  initialization start  *******************/
+									/******************  initialization finish  *******************/
+									break;
+							}
+							break;
+						default:
+							// 路径判断
+							switch (url.pathname) {
+								case "/apple.parsec.spotlight.v1alpha.ZkwSuggestService/Suggest": // 新闻建议
+									/******************  initialization start  *******************/
+									/******************  initialization finish  *******************/
+									break;
+							}
+							break;
+					}
+					rawBody = gRPC.encode(rawBody);
+					break;
+			}
+			// 写入二进制数据
+			$response.body = rawBody;
 			break;
 		}
 	}
