@@ -142,21 +142,21 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 							body.safari_smart_history_enabled = Settings.SafariSmartHistory;
 							body.smart_history_feature_feedback_enabled = Settings.SafariSmartHistory;
 							/*
-									if (body?.mescal_enabled) {
-										body.mescal_enabled = true;
-										body.mescal_version = 200;
-										body.mescal_cert_url = "https://init.itunes.apple.com/WebObjects/MZInit.woa/wa/signSapSetupCert";
-										body.mescal_setup_url = "https://play.itunes.apple.com/WebObjects/MZPlay.woa/wa/signSapSetup";
-									}
-									let smart_search_v2 = body?.smart_search_v2_parameters;
-									if (smart_search_v2) {
-										smart_search_v2.smart_history_score_v2_enabled = true;
-										smart_search_v2.smart_history_score_v2_enable_count = true;
-									};
-									body.session_experiment_metadata_enabled = true;
-									//body.sample_features = true;
-									//body.use_ledbelly = true;
-									*/
+							if (body?.mescal_enabled) {
+								body.mescal_enabled = true;
+								body.mescal_version = 200;
+								body.mescal_cert_url = "https://init.itunes.apple.com/WebObjects/MZInit.woa/wa/signSapSetupCert";
+								body.mescal_setup_url = "https://play.itunes.apple.com/WebObjects/MZPlay.woa/wa/signSapSetup";
+							}
+							let smart_search_v2 = body?.smart_search_v2_parameters;
+							if (smart_search_v2) {
+								smart_search_v2.smart_history_score_v2_enabled = true;
+								smart_search_v2.smart_history_score_v2_enable_count = true;
+							};
+							body.session_experiment_metadata_enabled = true;
+							//body.sample_features = true;
+							//body.use_ledbelly = true;
+							*/
 							break;
 						}
 					}

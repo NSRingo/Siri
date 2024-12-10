@@ -143,14 +143,14 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 													fixLocation = true;
 													break;
 												/*
-														case utterance.includes("何时") || utterance.includes("几时") || utterance.includes("when "):
-														case utterance.includes("什么时") || utterance.includes("几点") || utterance.includes("what time "):
-														case utterance.includes("哪里") || utterance.includes("哪儿") || utterance.includes("何处") || utterance.includes("where "):
-														case utterance.includes("哪个") || utterance.includes("哪一个") || utterance.includes("which "):
-															// 反例："When was the first plane invented?", "Where was Steve Jobs born?", etc.
-															fixLocation = false;
-															break;
-														*/
+												case utterance.includes("何时") || utterance.includes("几时") || utterance.includes("when "):
+												case utterance.includes("什么时") || utterance.includes("几点") || utterance.includes("what time "):
+												case utterance.includes("哪里") || utterance.includes("哪儿") || utterance.includes("何处") || utterance.includes("where "):
+												case utterance.includes("哪个") || utterance.includes("哪一个") || utterance.includes("which "):
+													// 反例："When was the first plane invented?", "Where was Steve Jobs born?", etc.
+													fixLocation = false;
+													break;
+												*/
 												case utterance.includes("气压") || utterance.includes("air pressure") || utterance.includes("barometric pressure") || utterance.includes("atmospheric pressure") || utterance.includes("atmosphere pressure"):
 												case utterance.includes("湿度") || utterance.includes("humidity"):
 												case utterance.includes("温度") || utterance.includes("temperature"):
@@ -217,7 +217,7 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 													fixLocation = false;
 													break;
 											}
-											body?.queries?.[0]?.profileSlices.forEach((profileSlice, index) => {
+											body?.queries?.[0]?.profileSlices.forEach(profileSlice => {
 												switch (profileSlice?.values?.[0]?.value?.typeUrl) {
 													case "type.googleapis.com/apple.parsec.siri.v2alpha.AppInfo": {
 														/******************  initialization start  *******************/
@@ -280,7 +280,6 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 											break;
 										}
 										case "/apple.parsec.responseframework.engagement.v1alpha.EngagementSearch/EngagementSearch": {
-											//
 											/******************  initialization start  *******************/
 											class EngagementRequest$Type extends MessageType {
 												constructor() {
@@ -358,6 +357,9 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 							break;
 						case "/search": // 搜索
 							switch (url.searchParams.get("qtype")) {
+								case "card": // 卡片
+									url.searchParams.set("card_locale", `${Language}_${Settings.CountryCode}`);
+									break;
 								case "zkw": // 处理"新闻"小组件
 									switch (Settings.CountryCode) {
 										case "CN":
@@ -390,6 +392,11 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 										url.searchParams.set("q", q.replace(/%E5%A4%A9%E6%B0%94/, "weather")); // "天气"替换为"weather"
 										if (/.*%E5%B8%82%20weather$/.test(q)) url.searchParams.set("q", q.replace(/%20weather$/, "%E5%B8%82%20weather"));
 									}
+									break;
+							}
+							switch (url.searchParams.get("siri_env")) {
+								case "4": // 4: Siri Requests
+									url.searchParams.set("siri_locale", `${Language}_${Settings.CountryCode}`);
 									break;
 							}
 							break;

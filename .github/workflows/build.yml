@@ -34,8 +34,12 @@ jobs:
           ignore-semver-check: "false" # If set to "true", will not check if the version number is a valid semver version.
       - name: Build scripts
         run: npm run build
-      - name: Generate modules
-        run: npm run build:args
+      - name: Generate Siri modules
+        run: npm run build:args:siri
+      - name: Generate Search modules
+        run: npm run build:args:search
+      - name: Generate Spotlight modules
+        run: npm run build:args:spotlight
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
@@ -43,5 +47,4 @@ jobs:
           path: |
             CHANGELOG.md
             rulesets
-            modules
             dist

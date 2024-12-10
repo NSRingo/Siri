@@ -1,0 +1,32 @@
+#!name = {{@package 'displayName'}}
+#!desc = iOS 18⬆️ & macOS 15⬆️\n全面自定义「Apple智能与Siri」中的「Siri请求」功能。\n本模块不含自定义「Apple智能与Siri」中的「Siri建议」功能。
+#!openUrl = {{@package 'openUrl'}}
+#!author = {{@package 'contributors'}}
+#!homepage = {{@package 'homepage'}}/apple-intelligence-and-siri
+#!icon = {{@package 'icon'}}
+#!category = {{@package 'organizationName'}}
+#!date = {{now "yyyy-MM-dd HH:mm:ss"}}
+#!version = {{@package 'version'}}
+
+#[rewrite_local]
+# Siri Search
+^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search url script-request-header https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
+^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search url script-response-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
+# Apple.Parsec.Siri.V2Alpha.SiriSearch
+^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
+^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch url script-response-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
+# Apple.Parsec.Lookup.V1Alpha.LookupSearch
+^https?:\/\/(api-lookup|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
+^https?:\/\/(api-lookup|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch url script-response-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
+# Apple.Parsec.Visualsearch.V2.VisualSearch
+^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
+^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch url script-response-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
+# Apple.Parsec.ResponseFramework.Engagement.V1Alpha.EngagementSearch
+^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
+^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch url script-response-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
+# Apple.Parsec.Spotlight.V1Alpha.ZkwSuggestService
+^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
+^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest url script-response-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
+
+#[mitm]
+hostname = guzzoni.smoot.apple.com, api2.smoot.apple.com, api-*.smoot.apple.com

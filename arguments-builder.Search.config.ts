@@ -2,28 +2,30 @@ import { defineConfig } from "@iringo/arguments-builder";
 export default defineConfig({
 	output: {
 		surge: {
-			path: "./dist/iRingo.Siri.sgmodule",
+			path: "./dist/iRingo.Search.sgmodule",
+			template: "./template/Search/surge.handlebars",
 			transformEgern: {
 				enable: true,
-				path: "./dist/iRingo.Siri.yaml",
+				path: "./dist/iRingo.Search.yaml",
 			},
 		},
 		loon: {
-			path: "./dist/iRingo.Siri.plugin",
+			path: "./dist/iRingo.Search.plugin",
+			template: "./template/Search/loon.handlebars",
 		},
 		customItems: [
 			{
-				path: "./dist/iRingo.Siri.snippet",
-				template: "./template/quantumultx.handlebars",
+				path: "./dist/iRingo.Search.snippet",
+				template: "./template/Search/quantumultx.handlebars",
 			},
 			{
-				path: "./dist/iRingo.Siri.stoverride",
-				template: "./template/stash.handlebars",
+				path: "./dist/iRingo.Search.stoverride",
+				template: "./template/Search/stash.handlebars",
 			},
 		],
 		dts: { isExported: true, path: "./src/types.d.ts" },
 		boxjsSettings: {
-			path: "./template/boxjs.settings.json",
+			path: "./template/Search/boxjs.settings.json",
 			scope: "@iRingo.Spotlight.Settings",
 		},
 	},

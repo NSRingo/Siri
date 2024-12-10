@@ -35,5 +35,4 @@ jobs:
           path: |
             CHANGELOG.md
             rulesets
-            modules
             dist
