@@ -112,10 +112,10 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 								case "api2.smoot.apple.com":
 								default:
 									//$request.headers["content-type"] = "application/grpc+proto";
-									if ($request.headers["user-agent"]?.includes("grpc-node-js")) $request.headers["user-agent"] = "PegasusKit/1 (iPhone14,3; iPhone OS 18.1 22B5054e) siri/1";
 									// 路径判断
 									switch (url.pathname) {
 										case "/apple.parsec.siri.v2alpha.SiriSearch/SiriSearch": {
+											if ($request.headers["user-agent"]?.includes("grpc-node-js")) $request.headers["user-agent"] = "PegasusKit/1 (Mac16,1; macOS 15.2 24C101) siri/1";
 											// Siri搜索
 											body = SiriPegasusRequest.fromBinary(rawBody);
 											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
@@ -267,6 +267,7 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 											break;
 										}
 										case "/apple.parsec.safari.v1alpha.SafariSearch/SafariSearch": // Safari 搜索
+											if ($request.headers["user-agent"]?.includes("grpc-node-js")) $request.headers["user-agent"] = "PegasusKit/1 (Mac16,1; macOS 15.2 24C101) safari/1";
 											body = SafariSearchRequest.fromBinary(rawBody);
 											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
@@ -274,21 +275,21 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 											rawBody = SafariSearchRequest.toBinary(body);
 											break;
 										case "/apple.parsec.lookup.v1alpha.LookupSearch/LookupSearch": // 查询搜索
+											if ($request.headers["user-agent"]?.includes("grpc-node-js")) $request.headers["user-agent"] = "PegasusKit/1 (Mac16,1; macOS 15.2 24C101) lookup/1";
 											body = LookupSearchRequest.fromBinary(rawBody);
 											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
 											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											rawBody = LookupSearchRequest.toBinary(body);
 											break;
-										case "/apple.parsec.visualsearch.v2.VisualSearch/VisualSearch": {
-											// 视觉搜索
+										case "/apple.parsec.visualsearch.v2.VisualSearch/VisualSearch": // 视觉搜索
+											if ($request.headers["user-agent"]?.includes("grpc-node-js")) $request.headers["user-agent"] = "PegasusKit/1 (Mac16,1; macOS 15.2 24C101) visualintelligence/1";
 											body = VisualSearchRequest.fromBinary(rawBody);
 											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
 											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											rawBody = VisualSearchRequest.toBinary(body);
 											break;
-										}
 										case "/apple.parsec.responseframework.engagement.v1alpha.EngagementSearch/EngagementSearch": {
 											/******************  initialization start  *******************/
 											class EngagementRequest$Type extends MessageType {
