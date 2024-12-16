@@ -9,17 +9,19 @@
 #!version = {{@package 'version'}}
 
 #[rewrite_local]
-# Siri Search
+⭕ Siri.Search.request
 ^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search url script-request-header https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
-# Apple.Parsec.Siri.V2Alpha.SiriSearch
+⭕ Siri.SiriSearch.request
 ^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
-# Apple.Parsec.Lookup.V1Alpha.LookupSearch
+🔍 Safari.SafariSearch.request
+^https?:\/\/api-safari-.+\.smoot\.apple\.com\/apple\.parsec\.safari\.v1alpha\.SafariSearch\/SafariSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
+🔍 Lookup.LookupSearch.request
 ^https?:\/\/(api-lookup|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
-# Apple.Parsec.Visualsearch.V2.VisualSearch
+🔍 Visualsearch.VisualSearch.request
 ^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
-# Apple.Parsec.ResponseFramework.Engagement.V1Alpha.EngagementSearch
+🔍 ResponseFramework.Engagement.EngagementSearch.request
 ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
-# Apple.Parsec.Spotlight.V1Alpha.ZkwSuggestService
+🔍 Spotlight.ZkwSuggestService.request
 ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
 
 #[mitm]
