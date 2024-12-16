@@ -30,13 +30,13 @@ http:
       require-body: true
       binary-mode: true
       argument:
-    - match: ^https?:\/\/api-safari-.+\.smoot\.apple\.com\/apple\.parsec\.safari\.v1alpha\.SafariSearch\/SafariSearch
+    - match: ^https?:\/\/api-safari(-.+)?\.smoot\.apple\.com\/apple\.parsec\.safari\.v1alpha\.SafariSearch\/SafariSearch
       name: "Siri.request"
       type: request
       require-body: true
       binary-mode: true
       argument:
-    - match: ^https?:\/\/(api-lookup|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch
+    - match: ^https?:\/\/api-lookup(-.+)?\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch
       name: "Siri.request"
       type: request
       require-body: true
