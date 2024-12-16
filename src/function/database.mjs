@@ -2,6 +2,7 @@ export default {
 	Siri: {
 		Settings: {
 			CountryCode: "US",
+			SiriLocale: "AUTO",
 			Region: "AUTO",
 			SiriResponseLanguageVariant: "zh_CN",
 		},

@@ -9,10 +9,23 @@ export default function modifyPegasusQueryContext(queryContext, Settings) {
         // biome-ignore lint/suspicious/noFallthroughSwitchClause: <explanation>
         case "AUTO":
             Settings.CountryCode = CountryCode;
-        //break;
         default:
             queryContext.countryCode = Settings.CountryCode;
+            
+            break;
+    };
+    switch (Settings.Region) {
+        case "AUTO":
+            break;
+        default:
             queryContext.region = Settings.CountryCode;
+            break;
+    };
+    switch (Settings.SiriLocale) {
+        case "AUTO":
+            break;
+        default:
+            queryContext.siriLocale = Settings.SiriLocale;
             break;
     };
     switch (Settings.SiriResponseLanguageVariant) {
@@ -23,7 +36,6 @@ export default function modifyPegasusQueryContext(queryContext, Settings) {
             break;
     };
     if (queryContext?.skuRegion === "CH") queryContext.skuRegion = "LL";
-    //delete queryContext?.location;
     Console.log("✅ modify PegasusQueryContext");
     return queryContext;
 };
