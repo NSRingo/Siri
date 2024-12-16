@@ -24,68 +24,33 @@ http:
       name: "Siri.request"
       type: request
       argument:
-    - match: ^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search
-      name: "Siri.request"
-      type: response
-      require-body: true
-      argument:
-    - match: ^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch
-      name: "Siri.response"
-      type: request
-      require-body: true
-      binary-mode: true
-      argument:
     - match: ^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch
       name: "Siri.request"
-      type: response
-      require-body: true
-      binary-mode: true
-      argument:
-    - match: ^https?:\/\/(api-lookup|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch
-      name: "Siri.response"
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/(api-lookup|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch
       name: "Siri.request"
-      type: response
-      require-body: true
-      binary-mode: true
-      argument:
-    - match: ^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch
-      name: "Siri.response"
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch
       name: "Siri.request"
-      type: response
-      require-body: true
-      binary-mode: true
-      argument:
-    - match: ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch
-      name: "Siri.response"
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch
       name: "Siri.request"
-      type: response
-      require-body: true
-      binary-mode: true
-      argument:
-    - match: ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest
-      name: "Siri.response"
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest
       name: "Siri.request"
-      type: response
+      type: request
       require-body: true
       binary-mode: true
       argument:

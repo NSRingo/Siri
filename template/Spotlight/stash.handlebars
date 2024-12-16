@@ -38,19 +38,9 @@ http:
       name: Siri.request
       type: request
       argument:
-    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/search
-      name: Siri.response
-      type: response
-      require-body: true
-      argument:
     - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/card
       name: Siri.request
       type: request
-      argument:
-    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/card
-      name: Siri.response
-      type: request
-      require-body: true
       argument:
     - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/flight
       name: Siri.request

@@ -16,22 +16,16 @@
 [Script]
 # Siri Search
 http-request ^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, tag=⭕ Siri.Search.request , argument={{{scriptParams}}}
-http-response ^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search requires-body=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, tag=⭕ Siri.Search.response, argument={{{scriptParams}}}
 # Apple.Parsec.Siri.V2Alpha.SiriSearch
 http-request ^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=⭕ Siri.SiriSearch.request, argument={{{scriptParams}}}
-http-response ^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, tag=⭕ Siri.SiriSearch.response, argument={{{scriptParams}}}
 # Apple.Parsec.Lookup.V1Alpha.LookupSearch
 http-request ^https?:\/\/(api-lookup|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 Lookup.LookupSearch.request, argument={{{scriptParams}}}
-http-response ^https?:\/\/(api-lookup|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, tag=🔍 Lookup.LookupSearch.response, argument={{{scriptParams}}}
 # Apple.Parsec.Visualsearch.V2.VisualSearch
 http-request ^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 Visualsearch.VisualSearch.request, argument={{{scriptParams}}}
-http-response ^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, tag=🔍 Visualsearch.VisualSearch.response, argument={{{scriptParams}}}
 # Apple.Parsec.ResponseFramework.Engagement.V1Alpha.EngagementSearch
 http-request ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 ResponseFramework.Engagement.EngagementSearch.request, argument={{{scriptParams}}}
-http-response ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, tag=🔍 ResponseFramework.Engagement.EngagementSearch.response, argument={{{scriptParams}}}
 # Apple.Parsec.Spotlight.V1Alpha.ZkwSuggestService
 http-request ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 Spotlight.ZkwSuggestService.request, argument={{{scriptParams}}}
-http-response ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest requires-body=1, binary-body-mode=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, tag=🔍 Spotlight.ZkwSuggestService.response, argument={{{scriptParams}}}
 
 [MITM]
 hostname = guzzoni.smoot.apple.com, api2.smoot.apple.com, api-*.smoot.apple.com

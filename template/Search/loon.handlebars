@@ -23,7 +23,6 @@ http-request ^https?:\/\/api2?\.smoot\.apple\.(com|cn)\/bag script-path=https://
 http-response ^https?:\/\/api2?\.smoot\.apple\.(com|cn)\/bag script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, requires-body=1, tag=🔍 Search.Bag.response, argument={{{scriptParams}}}
 # Siri Suggestions & Look Up Search (iOS/macOS)
 http-request ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/search script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 Search.Search.request, argument={{{scriptParams}}}
-http-response ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/search script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, requires-body=1, tag=🔍 Search.Search.response, argument={{{scriptParams}}}
 # Flight Search (iOS/macOS)
 http-request ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/flight script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 Search.Flight.request, argument={{{scriptParams}}}
 
