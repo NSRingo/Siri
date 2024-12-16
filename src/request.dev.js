@@ -61,7 +61,7 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 				case "application/vnd.apple.mpegurl":
 				case "audio/mpegurl":
 					//body = M3U8.parse($request.body);
-					//Console.debug(`body: ${JSON.stringify(body)}`);
+					//Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 					//$request.body = M3U8.stringify(body);
 					break;
 				case "text/xml":
@@ -71,19 +71,19 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 				case "application/plist":
 				case "application/x-plist":
 					//body = XML.parse($request.body);
-					//Console.debug(`body: ${JSON.stringify(body)}`);
+					//Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 					//$request.body = XML.stringify(body);
 					break;
 				case "text/vtt":
 				case "application/vtt":
 					//body = VTT.parse($request.body);
-					//Console.debug(`body: ${JSON.stringify(body)}`);
+					//Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 					//$request.body = VTT.stringify(body);
 					break;
 				case "text/json":
 				case "application/json":
 					//body = JSON.parse($request.body ?? "{}");
-					//Console.debug(`body: ${JSON.stringify(body)}`);
+					//Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 					//$request.body = JSON.stringify(body);
 					break;
 				case "application/protobuf":
@@ -117,7 +117,7 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 										case "/apple.parsec.siri.v2alpha.SiriSearch/SiriSearch": {
 											// Siri搜索
 											body = SiriPegasusRequest.fromBinary(rawBody);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
 											let fixLocation = true;
 											const utterance = (body?.queries?.[0]?.utterance ?? "").toLowerCase();
@@ -151,6 +151,7 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 													fixLocation = false;
 													break;
 												*/
+												case utterance.includes("天气") || utterance.includes("weather"):
 												case utterance.includes("气压") || utterance.includes("air pressure") || utterance.includes("barometric pressure") || utterance.includes("atmospheric pressure") || utterance.includes("atmosphere pressure"):
 												case utterance.includes("湿度") || utterance.includes("humidity"):
 												case utterance.includes("温度") || utterance.includes("temperature"):
@@ -258,24 +259,25 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 														break;
 												}
 											});
+											Console.debug(`fixLocation: ${fixLocation}`);
 											if (fixLocation) delete body?.queryContext?.location;
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											rawBody = SiriPegasusRequest.toBinary(body);
 											break;
 										}
 										case "/apple.parsec.lookup.v1alpha.LookupSearch/LookupSearch": // 查询搜索
 											body = LookupSearchRequest.fromBinary(rawBody);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											rawBody = LookupSearchRequest.toBinary(body);
 											break;
 										case "/apple.parsec.visualsearch.v2.VisualSearch/VisualSearch": {
 											// 视觉搜索
 											body = VisualSearchRequest.fromBinary(rawBody);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											rawBody = VisualSearchRequest.toBinary(body);
 											break;
 										}
@@ -289,9 +291,9 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 											const EngagementRequest = new EngagementRequest$Type();
 											/******************  initialization finish  *******************/
 											body = EngagementRequest.fromBinary(rawBody);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											rawBody = EngagementRequest.toBinary(body);
 											break;
 										}
@@ -309,9 +311,9 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 											const ZkwSuggestRequest = new ZkwSuggestRequest$Type();
 											/******************  initialization finish  *******************/
 											body = ZkwSuggestRequest.fromBinary(rawBody);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											body.queryContext = modifyPegasusQueryContext(body.queryContext, Settings);
-											Console.debug(`body: ${JSON.stringify(body)}`);
+											Console.debug(`body: ${JSON.stringify(body, null, 2)}`);
 											rawBody = ZkwSuggestRequest.toBinary(body);
 											break;
 										}
