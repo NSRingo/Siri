@@ -78,7 +78,7 @@ export default defineConfig({
 			name: "区域",
 			type: "string",
 			defaultValue: "AUTO",
-			description: "忽略系统中“Siri”的“语言”设置，强制采用这里的设置。",
+			description: "作用未知，待测试。",
 			options: [
 				{ key: "AUTO", label: "🇺🇳自动（跟随系统地区设置）" },
 				{ key: "CN", label: "🇨🇳中国大陆" },
