@@ -1,9 +1,9 @@
 export default {
 	Siri: {
 		Settings: {
-			CountryCode: "US",
-			SiriLocale: "AUTO",
-			Region: "AUTO",
+			CountryCode: "SG",
+			SiriLocale: "zh_CN",
+			Region: "OFF",
 			SiriResponseLanguageVariant: "zh_CN",
 		},
 	},
