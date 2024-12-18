@@ -6,6 +6,9 @@ export default function modifyPegasusQueryContext(queryContext, Settings) {
 	const [Language, CountryCode] = Locale?.split("_") ?? [];
 	Console.info(`Locale: ${Locale}`, `Language: ${Language}`, `CountryCode: ${CountryCode}`);
 	switch (Settings.CountryCode) {
+		case "OFF":
+		case undefined:
+			break;
 		case "AUTO":
 			queryContext.CountryCode = CountryCode;
 			break;
@@ -14,6 +17,9 @@ export default function modifyPegasusQueryContext(queryContext, Settings) {
 			break;
 	}
 	switch (Settings.Region) {
+		case "OFF":
+		case undefined:
+			break;
 		case "AUTO":
 			queryContext.region = CountryCode;
 			break;
@@ -22,14 +28,20 @@ export default function modifyPegasusQueryContext(queryContext, Settings) {
 			break;
 	}
 	switch (Settings.SiriLocale) {
+		case "OFF":
+		case undefined:
+			break;
 		case "AUTO":
-			queryContext.siriLocale = Locale;
+			queryContext.siriLocale = `${Language?.split("-")[0]}_${CountryCode}`;
 			break;
 		default:
 			queryContext.siriLocale = Settings.SiriLocale;
 			break;
 	}
 	switch (Settings.SiriResponseLanguageVariant) {
+		case "OFF":
+		case undefined:
+			break;
 		case "AUTO":
 			queryContext.siriResponseLanguageVariant = Locale;
 			break;
