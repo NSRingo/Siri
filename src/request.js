@@ -1,4 +1,5 @@
 import { $app, Console, done, gRPC, Lodash as _ } from "@nsnanocat/util";
+import { MessageType } from "@protobuf-ts/runtime";
 import database from "./function/database.mjs";
 import setENV from "./function/setENV.mjs";
 import modifyPegasusQueryContext from "./function/modifyPegasusQueryContext.mjs";
