@@ -10,7 +10,7 @@
 
 #[rewrite_local]
 ⭕ Siri.Search.request
-^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search url script-request-header https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
+^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search url script-request-header https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
 ⭕ Siri.SiriSearch.request
 ^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch url script-request-body https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
 🔍 Safari.SafariSearch.request

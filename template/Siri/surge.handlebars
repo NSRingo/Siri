@@ -11,7 +11,7 @@
 #!arguments-desc = {{{argumentsDesc}}}
 
 [Script]
-⭕ Siri.Search.request = type=http-request, pattern=^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search, engine=webview, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, argument={{{scriptParams}}}
+⭕ Siri.Search.request = type=http-request, pattern=^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search, engine=webview, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, argument={{{scriptParams}}}
 ⭕ Siri.SiriSearch.request = type=http-request, pattern=^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, argument={{{scriptParams}}}
 🔍 Safari.SafariSearch.request = type=http-request, pattern=^https?:\/\/api-safari(-.+)?\.smoot\.apple\.com\/apple\.parsec\.safari\.v1alpha\.SafariSearch\/SafariSearch, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, argument={{{scriptParams}}}
 🔍 Lookup.LookupSearch.request = type=http-request, pattern=^https?:\/\/api-lookup(-.+)?\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, argument={{{scriptParams}}}
