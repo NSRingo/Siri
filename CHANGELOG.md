@@ -1,17 +1,15 @@
-### 🛠️ Bug Fixes
-  * 修复 `$argument` 和 `$persistentStore` 载入顺序颠倒的问题
-    * 正确顺序为先读取 `$argument` 再读取 `$persistentStore (BoxJs)`
-    * 即，有相同键名时，`$persistentStore (BoxJs)` 的值会覆盖 `$argument` 的值
+### 🆕 New Features
+  * 新增 `Siri 请求`支持
+    *  仅限 `iOS 18`, `iPadOS 18`, `macOS 15` 及以上版本
+    *  将 `Siri 请求`改为国际版
+    *  自定义 `Siri 请求`国家或地区代码
+    *  自定义 `Siri 请求`响应（回复）语言
 
 ### ‼️ Breaking Changes
-  * 从脚本中移除了 `@nsnanocat/url` polyfill
-    * 由于 `@nsnanocat/url` 已经被移除，所以 `⭕ Siri` 项目已完全不再支持 `🚀 ShadowRocket`
-
-### 🔣 Dependencies
-  * 升级了 `@nsnanocat/util`
-    * `util` 由 `submodule` 更改为 `package`
-    * `$platform` 改为 `$app`
-    * 使用了全新的 `Console` polyfill
-
-### 🔄 Other Changes
-  * 打包器由 `rollup` 更改为 `rspack`
+  * 分离了 `Siri 请求`与 `Siri 建议`模组
+    * 原 `⭕ Siri` 模块更名为 `🔍 Search`(iOS/iPadOS) 与 `🔍 Spotlight`(macOS) 模块，仅用于修改 `Siri 建议`
+      * 文件名为 `iRingo.Search.*` 与 `iRingo.Spotlight.*`
+      * `BoxJS` 面板由 `iRingo.Siri` 变更为 `iRingo.Spotlight`，仅在 `14` 与 `17` 版 `BoxJS` 订阅中提供
+    * 新 `⭕ Siri` 模块用于修改 `Siri 请求`
+      * 文件名为 `iRingo.Siri.*`
+      * `BoxJS` 面板为 `iRingo.Siri`，仅在最新版 `BoxJS` 订阅中提供
