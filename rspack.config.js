@@ -16,7 +16,11 @@ export default defineConfig({
 			//additionalAliases: ['console'],
 		}),
 		new rspack.BannerPlugin({
-			banner: `console.log('version: ${pkg.version}');`,
+			banner: `console.log('Date: ${new Date().toLocaleString('zh-CN', {timeZone: 'PRC'})}');`,
+			raw: true,
+		}),
+		new rspack.BannerPlugin({
+			banner: `console.log('Version: ${pkg.version}');`,
 			raw: true,
 		}),
 		new rspack.BannerPlugin({
@@ -24,11 +28,11 @@ export default defineConfig({
 			raw: true,
 		}),
 		new rspack.BannerPlugin({
-			banner: "console.log(' iRingo: ⭕ Siri');",
+			banner: `console.log('${pkg.displayName}');`,
 			raw: true,
 		}),
 		new rspack.BannerPlugin({
-			banner: "https://NSRingo.github.io",
+			banner: pkg.homepage,
 		}),
 	],
 	devtool: false,
