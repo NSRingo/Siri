@@ -8,7 +8,7 @@ author: |-
   {{#each (@package 'contributors')}}
   {{this}}
   {{/each}}
-homepage: "{{@package 'homepage'}}/siri
+homepage: "{{@package 'homepage'}}/siri"
 icon: "{{@package 'icon'}}"
 category: "{{@package 'organizationName'}}"
 date: "{{now "yyyy-MM-dd HH:mm:ss"}}"
@@ -21,52 +21,47 @@ http:
     - "api-*.smoot.apple.com"
   script:
     - match: ^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search
-      name: "Siri.request"
+      name: Siri.request
       type: request
       argument:
     - match: ^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch
-      name: "Siri.request"
+      name: Siri.request
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/api-safari(-.+)?\.smoot\.apple\.com\/apple\.parsec\.safari\.v1alpha\.SafariSearch\/SafariSearch
-      name: "Siri.request"
+      name: Siri.request
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/api-lookup(-.+)?\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch
-      name: "Siri.request"
+      name: Siri.request
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch
-      name: "Siri.request"
+      name: Siri.request
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch
-      name: "Siri.request"
+      name: Siri.request
       type: request
       require-body: true
       binary-mode: true
       argument:
     - match: ^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest
-      name: "Siri.request"
+      name: Siri.request
       type: request
       require-body: true
       binary-mode: true
       argument:
 
 script-providers:
-  "Siri.request":
-    url: https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js
-    interval: 86400
-  "Siri.response":
+  Siri.request:
     url: https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js
     interval: 86400
-
-
