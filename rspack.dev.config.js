@@ -5,21 +5,22 @@ import pkg from "./package.json" with { type: "json" };
 
 export default defineConfig({
 	entry: {
-		"request": "./src/request.dev.js",
-		"response": "./src/response.dev.js",
+		request: "./src/request.dev.js",
+		response: "./src/response.dev.js",
 	},
 	output: {
 		filename: "[name].bundle.js",
 	},
 	optimization: {
 		minimize: false,
+		usedExports: true,
 	},
 	plugins: [
 		new NodePolyfillPlugin({
 			//additionalAliases: ['console'],
 		}),
 		new rspack.BannerPlugin({
-			banner: `console.log('Date: ${new Date().toLocaleString('zh-CN', {timeZone: 'PRC'})}');`,
+			banner: `console.log('Date: ${new Date().toLocaleString("zh-CN", { timeZone: "PRC" })}');`,
 			raw: true,
 		}),
 		new rspack.BannerPlugin({
@@ -39,5 +40,6 @@ export default defineConfig({
 		}),
 	],
 	devtool: false,
+	externalsPresets: { node: true },
 	performance: false,
 });
