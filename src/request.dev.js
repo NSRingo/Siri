@@ -1,4 +1,5 @@
-import { $app, Console, done, gRPC, Lodash as _ } from "@nsnanocat/util";
+import { $app, Console, done, Lodash as _ } from "@nsnanocat/util";
+import gRPC from "@nsnanocat/grpc";
 import { MESSAGE_TYPE, reflectionMergePartial, BinaryReader, WireType, UnknownFieldHandler, isJsonObject, typeofJsonValue, jsonWriteOptions, MessageType } from "@protobuf-ts/runtime";
 import database from "./function/database.mjs";
 import setENV from "./function/setENV.mjs";

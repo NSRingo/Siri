@@ -45,7 +45,8 @@
 		"node-polyfill-webpack-plugin": "^4.1.0"
 	},
 	"dependencies": {
-		"@nsnanocat/util": "^1.7.6",
+		"@nsnanocat/grpc": "^1.0.0",
+		"@nsnanocat/util": "^0.0.0-preview-255840e",
 		"@protobuf-ts/runtime": "^2.9.3",
 		"pako": "^2.1.0"
 	}
