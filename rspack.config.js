@@ -11,6 +11,7 @@ export default defineConfig({
 	output: {
 		filename: "[name].bundle.js",
 	},
+	target: 'node',
 	plugins: [
 		new NodePolyfillPlugin({
 			//additionalAliases: ['console'],
