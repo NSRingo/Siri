@@ -188,6 +188,8 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 														utterance.includes("电") ||
 														utterance.includes("雪") ||
 														utterance.includes("雹")):
+												case (utterance.includes("雨") && (utterance.includes("停") || utterance.includes("下"))) || utterance.includes("出太阳") || (utterance.includes("rain") && (utterance.includes(" stop") || utterance.includes(" start"))):
+												case utterance.includes("升温") || utterance.includes("更热") || utterance.includes("降温") || utterance.includes("更冷") || utterance.includes("温度上升") || utterance.includes("温度下降") || utterance.includes("加衣服") || utterance.includes(" warmer") || utterance.includes("colder") || utterance.includes(" warm up") || utterance.includes(" cool down") || utterance.includes(" cool off"):
 												case utterance.includes("precipitation") || utterance.includes("forecast") || ((utterance.includes("chance") || utterance.includes("possibilit")) && (utterance.includes(" rain") || utterance.includes(" snow"))):
 												case utterance.includes("降雪") || utterance.includes("降水") || utterance.includes("预报") || ((utterance.includes("概率") || utterance.includes("几率")) && (utterance.includes("降水") || utterance.includes("降雪"))):
 													fixLocation = false;
