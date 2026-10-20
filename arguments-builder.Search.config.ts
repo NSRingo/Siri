@@ -31,6 +31,13 @@ export default defineConfig({
 	},
 	args: [
 		{
+			key: "Enabled",
+			name: "启用 Siri 建议",
+			type: "boolean",
+			defaultValue: true,
+			description: "是否启用「Siri 建议」功能。",
+		},
+		{
 			key: "CountryCode",
 			name: "国家或地区代码",
 			type: "string",

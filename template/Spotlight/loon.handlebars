@@ -22,8 +22,8 @@ DOMAIN,e16991.b.akamaiedge.net
 
 [Script]
 # Bag (iOS/macOS)
-http-request ^https?:\/\/api2?\.smoot\.apple\.(com|cn)\/bag script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 Spotlight.Bag.request, argument={{{scriptParams}}}
-http-response ^https?:\/\/api2?\.smoot\.apple\.(com|cn)\/bag script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, requires-body=1, tag=🔍 Spotlight.Bag.response, argument={{{scriptParams}}}
+http-request ^https?:\/\/api\.smoot\.apple\.(com|cn)\/bag script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 Spotlight.Bag.request, argument={{{scriptParams}}}
+http-response ^https?:\/\/api\.smoot\.apple\.(com|cn)\/bag script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/response.bundle.js, requires-body=1, tag=🔍 Spotlight.Bag.response, argument={{{scriptParams}}}
 # Siri Suggestions & Look Up Search (iOS/macOS)
 http-request ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/search script-path=https://github.com/NSRingo/Siri/releases/download/v{{@package 'version'}}/request.bundle.js, tag=🔍 Spotlight.Search.request, argument={{{scriptParams}}}
 # Siri Infomation Card (macOS)

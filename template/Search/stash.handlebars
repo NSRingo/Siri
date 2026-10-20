@@ -19,24 +19,24 @@ http:
     - "api*.smoot.apple.com"
     - "api.smoot.apple.cn"
   script:
-    - match: ^https?:\/\/api2?\.smoot\.apple\.(com|cn)\/bag
+    - match: ^https?:\/\/api\.smoot\.apple\.(com|cn)\/bag
       name: Siri.request
       type: request
       argument:
-    - match: ^https?:\/\/api2?\.smoot\.apple\.(com|cn)\/bag
+    - match: ^https?:\/\/api\.smoot\.apple\.(com|cn)\/bag
       name: Siri.response
       type: response
       require-body: true
       argument:
-    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/search
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/search
       name: Siri.request
       type: request
       argument:
-    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/card
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/card
       name: Siri.request
       type: request
       argument:
-    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.com\/flight
+    - match: ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/flight
       name: Siri.request
       type: request
       argument:
