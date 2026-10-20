@@ -44,6 +44,19 @@ async function replay(kind, variant, request, { app = "Loon", argument, response
 }
 
 for (const variant of ["", ".dev"]) {
+    test(`${variant || "release"}: binary response bytes survive a decoded text body`, async () => {
+        const frame = Uint8Array.from([0, 0, 0, 0, 3, 0xb0, 0x09, 0x01]);
+        const result = await replay("response", variant, {
+            url: "https://guzzoni.smoot.apple.com/apple.parsec.siri.v2alpha.SiriSearch/SiriSearch", method: "POST", headers: {},
+        }, {
+            response: {
+                status: 200, headers: { "Content-Type": "application/grpc+proto" },
+                body: new TextDecoder().decode(frame), bodyBytes: frame.buffer,
+            },
+        });
+        assert.deepEqual(new Uint8Array(result.body), frame);
+    });
+
     test(`${variant || "release"}: CN bag host continues through country handling`, async () => {
         const result = await replay("request", variant, {
             url: "https://api.smoot.apple.cn/search?cc=CN&locale=zh-Hans_TW&qtype=card",

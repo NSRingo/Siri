@@ -169,6 +169,8 @@ export async function Response($request, $response) {
 		case "application/grpc":
 		case "application/grpc+proto":
 		case "application/octet-stream": {
+			let rawBody = $response.bodyBytes ? new Uint8Array($response.bodyBytes) : ($response.body ?? new Uint8Array());
+			$response.body = rawBody;
 			break;
 		}
 	}
