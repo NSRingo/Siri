@@ -1,0 +1,26 @@
+#!name =  iRingo: 🔍 Search β
+#!desc = BETA: iOS 17.6⬇️\n全面自定义「Siri 建议」功能。\n⚠️ 不含自定义「询问 Siri」功能。
+#!openUrl = http://boxjs.com/#/app/iRingo.Spotlight.beta
+#!author = {{@package 'contributors'}}
+#!homepage = {{@package 'homepage'}}/spotlight
+#!icon = https://developer.apple.com/assets/elements/icons/spotlight/spotlight-128x128.png
+#!tag = {{@package 'organizationName'}}
+#!system = {{@package 'system'}}
+#!date = {{now "yyyy-MM-dd HH:mm:ss"}}
+#!version = dev
+#!system_version = {{ @package 'systemVersion'}}
+
+[Argument]
+{{{arguments}}}
+
+[Script]
+# Bag (iOS/macOS)
+http-request ^https?:\/\/api\.smoot\.apple\.(com|cn)\/bag script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, tag=🔍 Search.Bag.request, argument={{{scriptParams}}}
+http-response ^https?:\/\/api\.smoot\.apple\.(com|cn)\/bag script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/response.dev.bundle.js, requires-body=1, tag=🔍 Search.Bag.response, argument={{{scriptParams}}}
+# Siri Suggestions & Look Up Search (iOS/macOS)
+http-request ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/search script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, tag=🔍 Search.Search.request, argument={{{scriptParams}}}
+# Flight Search (iOS/macOS)
+http-request ^https?:\/\/api(2|-.+)\.smoot\.apple\.(com|cn)\/flight script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, tag=🔍 Search.Flight.request, argument={{{scriptParams}}}
+
+[MITM]
+hostname = api*.smoot.apple.com, api.smoot.apple.cn

@@ -1,0 +1,23 @@
+#!name = {{@package 'displayName'}} β
+#!desc = BETA: iOS 18⬆️ & macOS 15⬆️\n全面自定义「Siri 请求」功能。\n⚠️ 不含自定义「Siri 建议」功能。
+#!openUrl = {{@package 'openUrl'}}.beta
+#!author = {{@package 'contributors'}}
+#!homepage = {{@package 'homepage'}}/siri
+#!icon = {{@package 'icon'}}
+#!category = {{@package 'organizationName'}}
+#!date = {{now "yyyy-MM-dd HH:mm:ss"}}
+#!version = dev
+#!arguments = {{{arguments}}}
+#!arguments-desc = {{{argumentsDesc}}}
+
+[Script]
+⭕ Siri.Search.request = type=http-request, pattern=^https?:\/\/(api-siri|api2|api-.+)\.smoot\.apple\.com\/search, engine=webview, debug=1, script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, argument={{{scriptParams}}}
+⭕ Siri.SiriSearch.request = type=http-request, pattern=^https?:\/\/(guzzoni|api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.siri\.v2alpha\.SiriSearch\/SiriSearch, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, argument={{{scriptParams}}}
+🔍 Safari.SafariSearch.request = type=http-request, pattern=^https?:\/\/api-safari(-.+)?\.smoot\.apple\.com\/apple\.parsec\.safari\.v1alpha\.SafariSearch\/SafariSearch, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, argument={{{scriptParams}}}
+🔍 Lookup.LookupSearch.request = type=http-request, pattern=^https?:\/\/api-lookup(-.+)?\.smoot\.apple\.com\/apple\.parsec\.lookup\.v1alpha\.LookupSearch\/LookupSearch, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, argument={{{scriptParams}}}
+🔍 Visualsearch.VisualSearch.request = type=http-request, pattern=^https?:\/\/(api2|api-.+)\.smoot\.apple\.com\/apple\.parsec\.visualsearch\.v2\.VisualSearch\/VisualSearch, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, argument={{{scriptParams}}}
+🔍 ResponseFramework.Engagement.EngagementSearch.request = type=http-request, pattern=^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.responseframework\.engagement\.v1alpha\.EngagementSearch\/EngagementSearch, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, argument={{{scriptParams}}}
+🔍 Spotlight.ZkwSuggestService.request = type=http-request, pattern=^https?:\/\/(api-.+)\.smoot\.apple\.com\/apple\.parsec\.spotlight\.v1alpha\.ZkwSuggestService\/Suggest, requires-body=1, binary-body-mode=1, engine=webview, debug=1, script-path=https://gist.githubusercontent.com/VirgilClyne/b5f0de011fabe5637ff53e585e9d061d/raw/request.dev.bundle.js, argument={{{scriptParams}}}
+
+[MITM]
+hostname = %APPEND% guzzoni.smoot.apple.com, api2.smoot.apple.com, api-*.smoot.apple.com

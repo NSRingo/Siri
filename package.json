@@ -28,10 +28,26 @@
     "scripts": {
         "build": "rollup -c",
         "build:dev": "rollup -c rollup.dev.config.mjs",
-        "build:args:siri": "arguments-builder build -c arguments-builder.Siri.config.ts",
-        "build:args:search": "arguments-builder build -c arguments-builder.Search.config.ts",
-        "build:args:spotlight": "arguments-builder build -c arguments-builder.Spotlight.config.ts",
-        "dts": "arguments-builder dts"
+        "sgmoudle:dev": "sgmoudle dev",
+        "submodule": "git submodule update --remote",
+        "update": "npm update --save",
+        "dev": "npm-run-all --parallel build:dev build:dev-args",
+        "build:dev-args": "npm-run-all --serial build:dev-args:*",
+        "build:release-args": "npm-run-all --serial build:release-args:*",
+        "build:full-args": "npm-run-all --serial build:full-args:*",
+        "build:args": "npm-run-all --serial build:release-args build:full-args",
+        "build:dev-args:siri": "arguments-builder build -c arguments-builder.dev.config.ts",
+        "build:release-args:siri": "arguments-builder build -c arguments-builder.release.config.ts",
+        "build:full-args:siri": "arguments-builder boxjs -c arguments-builder.full.config.ts",
+        "build:dev-args:search": "arguments-builder build -c arguments-builder.Search.dev.config.ts",
+        "build:release-args:search": "arguments-builder build -c arguments-builder.Search.release.config.ts",
+        "build:full-args:search": "arguments-builder boxjs -c arguments-builder.Search.full.config.ts",
+        "build:dev-args:spotlight": "arguments-builder build -c arguments-builder.Spotlight.dev.config.ts",
+        "build:release-args:spotlight": "arguments-builder build -c arguments-builder.Spotlight.release.config.ts",
+        "build:full-args:spotlight": "arguments-builder boxjs -c arguments-builder.Spotlight.full.config.ts",
+        "dts": "npm-run-all --serial dts:*",
+        "dts:siri": "arguments-builder dts -c arguments-builder.full.config.ts",
+        "dts:spotlight": "arguments-builder dts -c arguments-builder.Search.full.config.ts"
     },
     "browserslist": [
         "iOS >= 15"
