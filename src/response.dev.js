@@ -73,10 +73,11 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 					switch (url.pathname) {
 						case "/bag": {
 							// 配置
-							body.enabled = true;
-							body.feedback_enabled = true;
+							body.enabled = Settings.Enabled;
+							body.feedback_enabled = false;
 							//body.search_url = body?.search_url || "https:\/\/api-glb-apne1c.smoot.apple.com\/search";
 							//body.feedback_url = body?.feedback_url || "https:\/\/fbs.smoot.apple.com\/fb";
+							/*
 							if (body?.enabled_domains) {
 								body.enabled_domains = [...new Set([...(body?.enabled_domains ?? []), ...Settings.Domains])];
 								Console.info("领域列表", `enabled_domains: ${JSON.stringify(body.enabled_domains)}`);
@@ -86,6 +87,7 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 								Console.info("领域列表", `scene_aware_lookup_enabled_domains: ${JSON.stringify(body.scene_aware_lookup_enabled_domains)}`);
 							}
 							body.min_query_len = 3;
+							*/
 							const Overrides = body?.overrides;
 							if (Overrides)
 								[...new Set([...Object.keys(Overrides), ...Settings.Functions])].forEach(func => {
@@ -94,54 +96,60 @@ Console.info(`PLATFORM: ${PLATFORM}`);
 									//_.set(Overrides, `${func}.feedback_enabled`, true);
 									switch (func) {
 										case "flightutilities":
-											_.set(Overrides, "flightutilities.enabled", true);
-											_.set(Overrides, "flightutilities.feedback_enabled", true);
+											if (Settings.Functions.includes("flightutilities")) _.set(Overrides, "flightutilities.enabled", true);
+											_.set(Overrides, "flightutilities.feedback_enabled", false);
+											_.set(Overrides, "flightutilities.experiments_custom_feedback_enabled", false);
 											//_.set(Overrides, "flightutilities.flight_url",  "https:\/\/api-glb-aps1b.smoot.apple.com\/flight");
 											//_.set(Overrides, "flightutilities.fallback_flight_url", "https:\/\/api-glb-apse1c.smoot.apple.com\/flight");
 											break;
 										case "lookup":
-											_.set(Overrides, "lookup.enabled", true);
-											_.set(Overrides, "lookup.feedback_enabled", true);
+											if (Settings.Functions.includes("lookup")) _.set(Overrides, "lookup.enabled", true);
+											_.set(Overrides, "lookup.feedback_enabled", false);
+											_.set(Overrides, "lookup.experiments_custom_feedback_enabled", false);
 											//_.set(Overrides, "lookup.min_query_len", 2);
 											//_.set(Overrides, "lookup.search_render_timeout", 2000);
 											break;
 										case "mail":
-											_.set(Overrides, "mail.enabled", true);
-											_.set(Overrides, "mail.feedback_enabled", true);
+											if (Settings.Functions.includes("mail")) _.set(Overrides, "mail.enabled", true);
+											_.set(Overrides, "mail.feedback_enabled", false);
+											_.set(Overrides, "mail.experiments_custom_feedback_enabled", false);
 											break;
 										case "messages":
-											_.set(Overrides, "messages.enabled", true);
-											_.set(Overrides, "messages.feedback_enabled", true);
+											if (Settings.Functions.includes("messages")) _.set(Overrides, "messages.enabled", true);
+											_.set(Overrides, "messages.feedback_enabled", false);
+											_.set(Overrides, "messages.experiments_custom_feedback_enabled", false);
 											break;
 										case "news":
-											_.set(Overrides, "news.enabled", true);
-											_.set(Overrides, "news.feedback_enabled", true);
+											if (Settings.Functions.includes("news")) _.set(Overrides, "news.enabled", true);
+											_.set(Overrides, "news.feedback_enabled", false);
+											_.set(Overrides, "news.experiments_custom_feedback_enabled", false);
 											break;
 										case "safari":
-											_.set(Overrides, "safari.enabled", true);
-											_.set(Overrides, "safari.feedback_enabled", true);
-											_.set(Overrides, "safari.experiments_custom_feedback_enabled", true);
+											if (Settings.Functions.includes("safari")) _.set(Overrides, "safari.enabled", true);
+											_.set(Overrides, "safari.feedback_enabled", false);
+											_.set(Overrides, "safari.experiments_custom_feedback_enabled", false);
 											break;
 										case "spotlight":
-											_.set(Overrides, "spotlight.enabled", true);
-											_.set(Overrides, "spotlight.feedback_enabled", true);
+											if (Settings.Functions.includes("spotlight")) _.set(Overrides, "spotlight.enabled", true);
+											_.set(Overrides, "spotlight.feedback_enabled", false);
 											//_.set(Overrides, "spotlight.use_twolayer_ranking", true);
-											//_.set(Overrides, "spotlight.experiments_custom_feedback_enabled", true);
+											_.set(Overrides, "spotlight.experiments_custom_feedback_enabled", false);
 											//_.set(Overrides, "spotlight.min_query_len", 2);
 											//_.set(Overrides, "spotlight.collect_scores", true);
 											//_.set(Overrides, "spotlight.collect_anonymous_metadata", true);
 											break;
 										case "visualintelligence":
-											_.set(Overrides, "visualintelligence.enabled", true);
-											_.set(Overrides, "visualintelligence.feedback_enabled", true);
-											_.set(Overrides, "visualintelligence.enabled_domains", [...new Set([...(Overrides.visualIntelligence?.enabled_domains ?? []), ...Configs.VisualIntelligence.EnableDomains])]);
-											_.set(Overrides, "visualintelligence.supported_domains", [...new Set([...(Overrides.visualIntelligence?.supported_domains ?? []), ...Configs.VisualIntelligence.SupportedDomains])]);
+											if (Settings.Functions.includes("visualintelligence")) _.set(Overrides, "visualintelligence.enabled", true);
+											_.set(Overrides, "visualintelligence.feedback_enabled", false);
+											_.set(Overrides, "visualintelligence.experiments_custom_feedback_enabled", false);
+											//_.set(Overrides, "visualintelligence.enabled_domains", [...new Set([...(Overrides.visualIntelligence?.enabled_domains ?? []), ...Configs.VisualIntelligence.EnableDomains])]);
+											//_.set(Overrides, "visualintelligence.supported_domains", [...new Set([...(Overrides.visualIntelligence?.supported_domains ?? []), ...Configs.VisualIntelligence.SupportedDomains])]);
 											break;
 									}
 								});
 							// Safari Smart History
 							body.safari_smart_history_enabled = Settings.SafariSmartHistory;
-							body.smart_history_feature_feedback_enabled = Settings.SafariSmartHistory;
+							body.smart_history_feature_feedback_enabled = false;
 							/*
 							if (body?.mescal_enabled) {
 								body.mescal_enabled = true;

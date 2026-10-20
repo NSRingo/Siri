@@ -9,6 +9,7 @@ export default {
 	},
 	Spotlight: {
 		Settings: {
+			Enabled: true,
 			CountryCode: "SG",
 			Domains: ["web", "itunes", "app_store", "movies", "restaurants", "maps"],
 			Functions: ["flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
