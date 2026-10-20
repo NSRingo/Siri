@@ -21,17 +21,108 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: artifact
-      - name: Deploy
+      - name: Deploy Request
         uses: exuanbo/actions-deploy-gist@main
         with:
           token: ${{ secrets.GIST_TOKEN }}
           gist_id: b5f0de011fabe5637ff53e585e9d061d
           gist_description: " iRingo: ⭕ Siri β"
-          file_path: dist/request.bundle.js
-      - name: Deploy
+          file_path: dist/request.dev.bundle.js
+      - name: Deploy Response
         uses: exuanbo/actions-deploy-gist@main
         with:
           token: ${{ secrets.GIST_TOKEN }}
           gist_id: b5f0de011fabe5637ff53e585e9d061d
           gist_description: " iRingo: ⭕ Siri β"
-          file_path: dist/response.bundle.js
+          file_path: dist/response.dev.bundle.js
+      - name: Deploy Siri Surge Module
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Siri.dev.sgmodule
+      - name: Deploy Siri Loon Plugin
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Siri.dev.plugin
+      - name: Deploy Siri Quantumult X Snippet
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Siri.dev.snippet
+      - name: Deploy Siri Stash Override
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Siri.dev.stoverride
+      - name: Deploy Search Surge Module
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Search.dev.sgmodule
+      - name: Deploy Search Loon Plugin
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Search.dev.plugin
+      - name: Deploy Search Quantumult X Snippet
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Search.dev.snippet
+      - name: Deploy Search Stash Override
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Search.dev.stoverride
+      - name: Deploy Spotlight Surge Module
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Spotlight.dev.sgmodule
+      - name: Deploy Spotlight Loon Plugin
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Spotlight.dev.plugin
+      - name: Deploy Spotlight Stash Override
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: dist/iRingo.Spotlight.dev.stoverride
+      - name: Deploy Wikipedia Ruleset (list)
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: rulesets/LookUp.Wikipedia.list
+      - name: Deploy Wikipedia Ruleset (yaml)
+        uses: exuanbo/actions-deploy-gist@main
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: b5f0de011fabe5637ff53e585e9d061d
+          gist_description: " iRingo: ⭕ Siri β"
+          file_path: rulesets/LookUp.Wikipedia.yaml

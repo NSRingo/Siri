@@ -21,10 +21,20 @@ jobs:
         with:
           node-version: 'latest'
           cache: 'npm'
+      # https://github.com/puppeteer/puppeteer/issues/13595#issuecomment-2640309385
+      # https://github.com/puppeteer/puppeteer/blob/cdfbde6247fbe286c31a91ac62ffed6f2f801ee4/.github/workflows/ci.yml#L140
+      - name: Disable AppArmor
+        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       - name: Install dependencies
         run: npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
+      - name: Install Puppeteer Chrome
+        run: |
+          node node_modules/puppeteer/install.mjs
+          node --input-type=module -e 'import puppeteer from "puppeteer"; console.log(puppeteer.executablePath())'
+        env:
+          PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer
       - name: Update local package.json version from release tag
         if: github.ref_type == 'tag'
         uses: BellCubeDev/update-package-version-by-release-tag@v2
@@ -34,12 +44,14 @@ jobs:
           ignore-semver-check: "false" # If set to "true", will not check if the version number is a valid semver version.
       - name: Build scripts
         run: npm run build
-      - name: Generate Siri modules
-        run: npm run build:args:siri
-      - name: Generate Search modules
-        run: npm run build:args:search
-      - name: Generate Spotlight modules
-        run: npm run build:args:spotlight
+      - name: Generate modules
+        run: npm run build:args
+        env:
+          PUPPETEER_CACHE_DIR: ${{ runner.temp }}/puppeteer
+      - name: Verify Siri Egern module
+        run: test -s dist/iRingo.Siri.yaml
+      - name: Verify Search Egern module
+        run: test -s dist/iRingo.Search.yaml
       - name: Upload artifact
         uses: actions/upload-artifact@master
         with:
