@@ -13,41 +13,6 @@ jobs:
   debug:
     uses: ./.github/workflows/dev.yml
     secrets: inherit
-  cloudflare:
-    needs: debug
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@main
-        with:
-          submodules: recursive
-          token: ${{ secrets.SUBMODULE_TOKEN }}
-          ref: dev
-      - name: Set up Node.js
-        uses: actions/setup-node@main
-        with:
-          node-version: 'latest'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-      - name: Deploy api-smoot Worker
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: '4.151.3'
-          command: |
-            whoami
-            deploy --minify -c wrangler.workers.jsonc
-      - name: Deploy api-smoot Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: '4.151.3'
-          command: pages deploy pages --project-name api-smoot --branch dev --commit-hash ${{ github.sha }}
   deploy:
     needs: debug
     runs-on: ubuntu-latest
