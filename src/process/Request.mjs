@@ -4,11 +4,7 @@ import { MessageType } from "@protobuf-ts/runtime";
 import database from "../function/database.mjs";
 import setENV from "../function/setENV.mjs";
 import modifyPegasusQueryContext from "../function/modifyPegasusQueryContext.mjs";
-import { SiriPegasusRequest } from "../proto/apple/parsec/siri/v2alpha/SiriPegasusRequest.js";
-import { SafariSearchRequest } from "../proto/apple/parsec/safari/v1alpha/SafariSearchRequest.js";
-import { LookupSearchRequest } from "../proto/apple/parsec/lookup/v1alpha/LookupSearchRequest.js";
-import { VisualSearchRequest } from "../proto/apple/parsec/visualsearch/v2/VisualSearchRequest.js";
-import { PegasusQueryContext } from "../proto/apple/parsec/search/PegasusQueryContext.js";
+import { SiriPegasusRequest, SafariSearchRequest, LookupSearchRequest, VisualSearchRequest, PegasusQueryContext } from "@nsringo/parsec";
 /***************** Processing *****************/
 export async function Request($request) {
 	// 构造回复数据

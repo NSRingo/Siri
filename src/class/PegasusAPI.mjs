@@ -1,8 +1,6 @@
 import { Console } from "@nsnanocat/util";
 //import { MESSAGE_TYPE, reflectionMergePartial, BinaryReader, WireType, UnknownFieldHandler, isJsonObject, typeofJsonValue, jsonWriteOptions, MessageType } from "@protobuf-ts/runtime";
-import { SiriPegasusRequest } from "../proto/apple/parsec/siri/v2alpha/SiriPegasusRequest";
-import { SiriPegasusContext } from "../proto/apple/parsec/siri/v2alpha/SiriPegasusContext";
-import { PegasusQueryContext } from "../proto/apple/parsec/search/PegasusQueryContext";
+import { SiriPegasusRequest, SiriPegasusContext, PegasusQueryContext } from "@nsringo/parsec";
 export default class PegasusAPI {
     static Name = "PegasusAPI";
     static Version = "1.0.1";
