@@ -4,6 +4,7 @@ import test from "node:test";
 import vm from "node:vm";
 import { gzipSync, gunzipSync } from "node:zlib";
 import { MessageType } from "@protobuf-ts/runtime";
+import database from "../src/function/database.mjs";
 
 const queryContext = new MessageType("PegasusQueryContext", [
     { no: 2, name: "countryCode", kind: "scalar", T: 9 },
@@ -104,13 +105,15 @@ for (const variant of ["", ".dev"]) {
         });
     }
 
-    test(`${variant || "release"}: SG bag gains encrypted visual search and Siri configuration with flight overrides`, async () => {
+    test(`${variant || "release"}: SG bag gains fixed configuration without inserting unspecified URLs`, async () => {
         const input = {
             enabled: true, request_timeout: 5,
             flight_url: "https://api2.smoot.apple.com/flight",
             fallback_flight_url: "https://api2.smoot.apple.com/flight",
             overrides: {
+                cameravisualsearch: { enabled: false, supported_domains: { "camera-live": ["SERVER"], "screenshot-automatic": ["SERVER"], "screenshot-ondemand": ["PRESERVED"] } },
                 siri: { request_timeout: 30, sam_batch_timeout: 8000, sam_agentic_first_chunk_timeout: 8000, sam_agentic_next_chunk_timeout: 8000 },
+                visualintelligence: { supported_domains: ["SERVER"], enabled_domains: ["server"] },
             },
         };
         const result = await replay("response", variant, {
@@ -121,11 +124,20 @@ for (const variant of ["", ".dev"]) {
         });
         const body = JSON.parse(result.body);
         assert.equal(body.overrides.encryptedvisualsearch.enabled, true);
-        assert.equal(body.overrides.encryptedvisualsearch.search_url, "https://gateway-oblivious.apple.com/encryptedvisualsearch");
+        assert.equal(Object.hasOwn(body.overrides.encryptedvisualsearch, "search_url"), false);
         assert.deepEqual(body.overrides.encryptedvisualsearch.supported_usecases, ["VISUAL_LOOKUP_LANDMARK", "VISUAL_LOOKUP_STOREFRONT", "ENCRYPTED_PQA_GEO", "ENCRYPTED_GENMOJI"]);
         assert.equal(body.overrides.siri.enabled, true);
-        assert.equal(body.overrides.siri.search_url, "https://guzzoni.smoot.apple.com/search");
-        assert.equal(body.sam_search_url, "https://api-siri-prod.apple.com");
+        assert.equal(Object.hasOwn(body.overrides.siri, "search_url"), false);
+        assert.equal(Object.hasOwn(body, "sam_search_url"), false);
+        assert.equal(Object.hasOwn(body.overrides.messages, "min_query_len"), false);
+        assert.equal(Object.hasOwn(body.overrides.messages, "search_render_timeout"), false);
+        for (const scene of ["camera-live", "screenshot-automatic"]) {
+            assert.deepEqual(body.overrides.cameravisualsearch.supported_domains[scene], ["SERVER", ...database.Spotlight.Configs.CameraVisualSearch.SupportedDomains[scene]]);
+        }
+        assert.deepEqual(body.overrides.cameravisualsearch.supported_domains["screenshot-ondemand"], ["PRESERVED"]);
+        assert.equal(body.overrides.cameravisualsearch.enabled, true);
+        assert.deepEqual(body.overrides.visualintelligence.supported_domains, ["SERVER", ...database.Spotlight.Configs.VisualIntelligence.SupportedDomains]);
+        assert.deepEqual(body.overrides.visualintelligence.enabled_domains, ["server"]);
         for (const key of Object.keys(input.overrides.siri)) assert.equal(body.overrides.siri[key], input.overrides.siri[key]);
         assert.equal(body.overrides.flightutilities.flight_url, input.flight_url);
         assert.equal(body.overrides.flightutilities.fallback_flight_url, input.fallback_flight_url);
@@ -138,12 +150,44 @@ for (const variant of ["", ".dev"]) {
         }
     });
 
+    test(`${variant || "release"}: Messages parameters are opt-in and preserve numeric zero`, async () => {
+        const input = { overrides: { messages: { enabled: false, min_query_len: 9, search_render_timeout: 900 } } };
+        for (const fields of [{}, { "MessagesMinQueryLen": "", "MessagesSearchRenderTimeout": "" }, { "MessagesMinQueryLen": "1", "MessagesSearchRenderTimeout": "200" }, { "MessagesMinQueryLen": "0", "MessagesSearchRenderTimeout": "0" }]) {
+            const result = await replay("response", variant, { url: "https://api.smoot.apple.com/bag", method: "GET", headers: {} }, {
+                argument: new URLSearchParams({ Storage: "Argument", ...fields }).toString(),
+                response: { status: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) },
+            });
+            const body = JSON.parse(result.body);
+            assert.equal(body.overrides.messages.enabled, true);
+            assert.equal(body.overrides.messages.min_query_len, fields["MessagesMinQueryLen"] === "" || fields["MessagesMinQueryLen"] === undefined ? 9 : Number(fields["MessagesMinQueryLen"]));
+            assert.equal(body.overrides.messages.search_render_timeout, fields["MessagesSearchRenderTimeout"] === "" || fields["MessagesSearchRenderTimeout"] === undefined ? 900 : Number(fields["MessagesSearchRenderTimeout"]));
+        }
+        const result = await replay("response", variant, { url: "https://api.smoot.apple.com/bag", method: "GET", headers: {} }, {
+            argument: "Storage=Argument&Functions=lookup&MessagesMinQueryLen=1&MessagesSearchRenderTimeout=200",
+            response: { status: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) },
+        });
+        const body = JSON.parse(result.body);
+        for (const [key, value] of Object.entries(input.overrides.messages)) assert.equal(body.overrides.messages[key], value);
+    });
+
+    test(`${variant || "release"}: unselected Visual Intelligence preserves upstream domains`, async () => {
+        const input = { overrides: { visualintelligence: { enabled: false, supported_domains: ["SERVER"] } } };
+        const result = await replay("response", variant, { url: "https://api.smoot.apple.com/bag", method: "GET", headers: {} }, {
+            argument: "Storage=Argument&Functions=lookup",
+            response: { status: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) },
+        });
+        const body = JSON.parse(result.body);
+        assert.equal(body.overrides.visualintelligence.enabled, false);
+        assert.deepEqual(body.overrides.visualintelligence.supported_domains, ["SERVER"]);
+    });
+
     test(`${variant || "release"}: unselected bag functions retain upstream switches, URLs and usecases`, async () => {
         const input = {
             sam_search_url: "https://server.example/sam",
             flight_url: "https://server.example/flight",
             fallback_flight_url: "https://server.example/fallback-flight",
             overrides: {
+                cameravisualsearch: { enabled: false, supported_domains: { "camera-live": ["SERVER"], "screenshot-automatic": ["SERVER"], "screenshot-ondemand": ["SERVER"] } },
                 encryptedvisualsearch: { enabled: false, search_url: "https://server.example/encryptedvisualsearch", supported_usecases: ["SERVER"] },
                 siri: { enabled: false, search_url: "https://server.example/siri" },
                 flightutilities: { enabled: false, flight_url: "https://server.example/override-flight", fallback_flight_url: "https://server.example/override-fallback-flight" },
@@ -191,6 +235,26 @@ for (const variant of ["", ".dev"]) {
     });
 
     for (const upstreamURLs of [false, true]) {
+        test(`${variant || "release"}: undefined argument URLs ${upstreamURLs ? "preserve upstream properties" : "do not insert properties"}`, async () => {
+            const input = { overrides: { encryptedvisualsearch: {}, siri: {} } };
+            if (upstreamURLs) {
+                input.overrides.encryptedvisualsearch.search_url = "https://server.example/encrypted";
+                input.overrides.siri.search_url = "https://server.example/siri";
+                input.sam_search_url = "https://server.example/sam";
+            }
+            const result = await replay("response", variant, { url: "https://api.smoot.apple.com/bag", method: "GET", headers: {} }, {
+                argument: { Storage: "Argument", EncryptedVisualSearchURL: undefined, SiriSearchURL: undefined, SiriSAMSearchURL: undefined },
+                response: { status: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) },
+            });
+            const body = JSON.parse(result.body);
+            for (const name of ["encryptedvisualsearch", "siri"]) {
+                assert.equal(body.overrides[name].search_url, input.overrides[name].search_url);
+                assert.equal(Object.hasOwn(body.overrides[name], "search_url"), upstreamURLs);
+            }
+            assert.equal(body.sam_search_url, input.sam_search_url);
+            assert.equal(Object.hasOwn(body, "sam_search_url"), upstreamURLs);
+        });
+
         test(`${variant || "release"}: blank BoxJs URLs ${upstreamURLs ? "preserve upstream properties" : "do not insert properties"}`, async () => {
             const input = { overrides: { encryptedvisualsearch: {}, siri: {} } };
             if (upstreamURLs) {
