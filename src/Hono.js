@@ -10,11 +10,13 @@ export default new Hono()
     .all("/:rest{.*}", async c => {
         let $request = await HonoWorkerAdapter.buildRequest(c.req);
         $request = HonoWorkerAdapter.buildArgument($request);
+        const argument = globalThis.$argument;
         let $response;
         ({ $request, $response } = await Request($request));
         switch (typeof $response) {
             case "undefined":
                 $response = await fetch($request);
+                globalThis.$argument = argument;
                 $response = await Response($request, $response);
                 break;
             case "object":
