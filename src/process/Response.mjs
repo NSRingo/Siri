@@ -84,8 +84,23 @@ export async function Response($request, $response) {
 									//_.set(Overrides, `${func}.enabled`, true);
 									//_.set(Overrides, `${func}.feedback_enabled`, true);
 									switch (func) {
+										case "encryptedvisualsearch":
+											if (Settings.Functions.includes("encryptedvisualsearch")) {
+												_.set(Overrides, "encryptedvisualsearch.enabled", true);
+												_.set(Overrides, "encryptedvisualsearch.search_url", "https://gateway-oblivious.apple.com/encryptedvisualsearch");
+												_.set(Overrides, "encryptedvisualsearch.supported_usecases", ["VISUAL_LOOKUP_LANDMARK", "VISUAL_LOOKUP_STOREFRONT", "ENCRYPTED_PQA_GEO", "ENCRYPTED_GENMOJI"]);
+											}
+											_.set(Overrides, "encryptedvisualsearch.feedback_enabled", false);
+											_.set(Overrides, "encryptedvisualsearch.experiments_custom_feedback_enabled", false);
+											break;
 										case "flightutilities":
-											if (Settings.Functions.includes("flightutilities")) _.set(Overrides, "flightutilities.enabled", true);
+											if (Settings.Functions.includes("flightutilities")) {
+												_.set(Overrides, "flightutilities.enabled", true);
+												_.set(Overrides, "flightutilities.flight_url", "https://api2.smoot.apple.com/flight");
+												_.set(Overrides, "flightutilities.fallback_flight_url", "https://api2.smoot.apple.com/flight");
+												delete body.flight_url;
+												delete body.fallback_flight_url;
+											}
 											_.set(Overrides, "flightutilities.feedback_enabled", false);
 											_.set(Overrides, "flightutilities.experiments_custom_feedback_enabled", false);
 											//_.set(Overrides, "flightutilities.flight_url",  "https:\/\/api-glb-aps1b.smoot.apple.com\/flight");
@@ -117,6 +132,15 @@ export async function Response($request, $response) {
 											if (Settings.Functions.includes("safari")) _.set(Overrides, "safari.enabled", true);
 											_.set(Overrides, "safari.feedback_enabled", false);
 											_.set(Overrides, "safari.experiments_custom_feedback_enabled", false);
+											break;
+										case "siri":
+											if (Settings.Functions.includes("siri")) {
+												_.set(Overrides, "siri.enabled", true);
+												_.set(Overrides, "siri.search_url", "https://guzzoni.smoot.apple.com/search");
+												body.sam_search_url = "https://api-siri-prod.apple.com";
+											}
+											_.set(Overrides, "siri.feedback_enabled", false);
+											_.set(Overrides, "siri.experiments_custom_feedback_enabled", false);
 											break;
 										case "spotlight":
 											if (Settings.Functions.includes("spotlight")) _.set(Overrides, "spotlight.enabled", true);

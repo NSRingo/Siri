@@ -57,6 +57,7 @@ export interface Settings {
      * @remarks
      *
      * Possible values:
+     * - `'encryptedvisualsearch'` - 加密视觉搜索
      * - `'flightutilities'` - 航班工具
      * - `'lookup'` - 查询
      * - `'mail'` - 邮件
@@ -67,9 +68,9 @@ export interface Settings {
      * - `'spotlight'` - 聚焦搜索
      * - `'visualintelligence'` - 视觉智能
      *
-     * @defaultValue ["flightutilities","lookup","mail","messages","news","safari","siri","spotlight","visualintelligence"]
+     * @defaultValue ["encryptedvisualsearch","flightutilities","lookup","mail","messages","news","safari","siri","spotlight","visualintelligence"]
      */
-    Functions?: ('flightutilities' | 'lookup' | 'mail' | 'messages' | 'news' | 'safari' | 'siri' | 'spotlight' | 'visualintelligence')[];
+    Functions?: ('encryptedvisualsearch' | 'flightutilities' | 'lookup' | 'mail' | 'messages' | 'news' | 'safari' | 'siri' | 'spotlight' | 'visualintelligence')[];
     /**
      * Safari 智能历史记录
      *

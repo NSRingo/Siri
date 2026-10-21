@@ -466,9 +466,13 @@ export const spotlight: Arg[] = [
         key: "Functions",
         name: "功能",
         type: "array",
-        defaultValue: ["flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
+        defaultValue: ["encryptedvisualsearch", "flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
         description: "启用的「Siri 建议」功能，未选的功能不代表关闭，仅代表还原到该地区默认设置状态。",
         options: [
+            {
+                key: "encryptedvisualsearch",
+                label: "加密视觉搜索",
+            },
             {
                 key: "flightutilities",
                 label: "航班工具",
