@@ -1,7 +1,7 @@
 {
   "name": "api-smoot",
   "main": "src/Hono.js",
-  "compatibility_date": "2026-10-21",
+  "compatibility_date": "2025-11-21",
   "compatibility_flags": [
     "nodejs_compat"
   ],
