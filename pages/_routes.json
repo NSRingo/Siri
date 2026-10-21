@@ -1,7 +1,18 @@
 {
     "version": 1,
     "include": [
-        "/*"
+        "/bag",
+        "/search",
+        "/card",
+        "/flight",
+        "/warm",
+        "/render",
+        "/api.smoot.apple.com/bag",
+        "/api.smoot.apple.com/search",
+        "/api.smoot.apple.com/card",
+        "/api.smoot.apple.com/flight",
+        "/api.smoot.apple.com/warm",
+        "/api.smoot.apple.com/render"
     ],
     "exclude": []
 }

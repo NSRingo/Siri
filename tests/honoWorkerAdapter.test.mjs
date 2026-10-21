@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import HonoWorkerAdapter from "../src/class/HonoWorkerAdapter.mjs";
 
-for (const host of ["api-smoot.nanocat.cloud", "api-smoot.pages.dev"]) {
+for (const host of ["api-smoot.nanocat.cloud", "api-smoot.pages.dev", "api-smoot.nanocat.workers.dev", "dev.api-smoot.nanocat.cloud", "dev.api-smoot.pages.dev"]) {
     test(`${host} routes Search and Spotlight endpoints to Apple`, () => {
-        for (const path of ["bag", "search", "card", "flight"]) {
+        for (const path of ["bag", "search", "card", "flight", "warm", "render"]) {
             for (const prefix of ["", "api.smoot.apple.com/"]) {
                 const rest = `${prefix}${path}`;
                 const url = HonoWorkerAdapter.routeRewrite(new URL(`https://${host}/${rest}?cc=CN&locale=zh-Hans_CN`), rest);

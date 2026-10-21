@@ -57,8 +57,7 @@ export default class HonoWorkerAdapter {
     static routeRewrite(url, restPath = "") {
         switch (true) {
             case url.hostname.startsWith("api-smoot."):
-            case url.hostname.startsWith("siri."):
-            case url.hostname.startsWith("dev.siri."): {
+            case url.hostname.startsWith("dev.api-smoot."): {
                 url.hostname = "api.smoot.apple.com";
                 switch (true) {
                     case url.pathname.startsWith("/api.smoot.apple.com/"):
