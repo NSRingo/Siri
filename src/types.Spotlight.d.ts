@@ -57,6 +57,7 @@ export interface Settings {
      * @remarks
      *
      * Possible values:
+     * - `'cameravisualsearch'` - 相机视觉搜索
      * - `'encryptedvisualsearch'` - 加密视觉搜索
      * - `'flightutilities'` - 航班工具
      * - `'lookup'` - 查询
@@ -68,13 +69,13 @@ export interface Settings {
      * - `'spotlight'` - 聚焦搜索
      * - `'visualintelligence'` - 视觉智能
      *
-     * @defaultValue ["encryptedvisualsearch","flightutilities","lookup","mail","messages","news","safari","siri","spotlight","visualintelligence"]
+     * @defaultValue ["cameravisualsearch","encryptedvisualsearch","flightutilities","lookup","mail","messages","news","safari","siri","spotlight","visualintelligence"]
      */
-    Functions?: ('encryptedvisualsearch' | 'flightutilities' | 'lookup' | 'mail' | 'messages' | 'news' | 'safari' | 'siri' | 'spotlight' | 'visualintelligence')[];
+    Functions?: ('cameravisualsearch' | 'encryptedvisualsearch' | 'flightutilities' | 'lookup' | 'mail' | 'messages' | 'news' | 'safari' | 'siri' | 'spotlight' | 'visualintelligence')[];
     /**
      * [加密视觉搜索] 搜索 URL
      *
-     * 加密视觉搜索的 search_url。留空时不改写上游值，也不插入该属性。
+     * 加密视觉搜索的 search_url。留空或 undefined 时不检查、不改写该 URL，也不插入该属性。
      *
      * @defaultValue "https://gateway-oblivious.apple.com/encryptedvisualsearch"
      */
@@ -98,19 +99,11 @@ export interface Settings {
     /**
      * [Siri] 搜索 URL
      *
-     * Siri 的 search_url。留空时不改写上游值，也不插入该属性。
+     * Siri 的 search_url。留空或 undefined 时不检查、不改写该 URL，也不插入该属性。
      *
      * @defaultValue "https://guzzoni.smoot.apple.com/search"
      */
     SiriSearchURL?: string;
-    /**
-     * [Siri] SAM 搜索 URL
-     *
-     * 根级 sam_search_url。留空时不改写上游值，也不插入该属性。
-     *
-     * @defaultValue "https://api-siri-prod.apple.com"
-     */
-    SiriSAMSearchURL?: string;
     /**
      * Safari 智能历史记录
      *

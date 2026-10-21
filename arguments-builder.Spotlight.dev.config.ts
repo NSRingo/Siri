@@ -1,5 +1,5 @@
 import { defineConfig } from "@iringo/arguments-builder";
-import { spotlight, storage, logLevel } from "./arguments-builder.full.config";
+import { spotlightFull, storage, logLevel } from "./arguments-builder.full.config";
 
 export default defineConfig({
     output: {
@@ -22,5 +22,5 @@ export default defineConfig({
             scope: "@iRingo.Spotlight.Settings",
         },
     },
-    args: [...spotlight, ...storage, ...logLevel],
+    args: [...spotlightFull, ...storage, ...logLevel],
 });

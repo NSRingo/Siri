@@ -12,14 +12,26 @@ export default {
 			Enabled: true,
 			CountryCode: "SG",
 			Domains: ["web", "itunes", "app_store", "movies", "restaurants", "maps"],
-			Functions: ["encryptedvisualsearch", "flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
-			EncryptedVisualSearchURL: "https://gateway-oblivious.apple.com/encryptedvisualsearch",
+			Functions: ["cameravisualsearch", "encryptedvisualsearch", "flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
+			EncryptedVisualSearchURL: "",
 			EncryptedVisualSearchSupportedUsecases: ["VISUAL_LOOKUP_LANDMARK", "VISUAL_LOOKUP_STOREFRONT", "ENCRYPTED_PQA_GEO", "ENCRYPTED_GENMOJI"],
-			SiriSearchURL: "https://guzzoni.smoot.apple.com/search",
-			SiriSAMSearchURL: "https://api-siri-prod.apple.com",
+			SiriSearchURL: "",
+			SiriSAMSearchURL: "",
+			MessagesMinQueryLen: "",
+			MessagesSearchRenderTimeout: "",
 			SafariSmartHistory: true,
 		},
 		Configs: {
+			CameraVisualSearch: {
+				SupportedDomains: {
+					"camera-live": ["ANIMALS", "ART", "BIRDS", "BOOK", "CATS", "DOGS", "INSECTS", "LANDMARK", "MAMMALS", "NATURAL_LANDMARK", "NATURE", "REPTILES", "SCULPTURE"],
+					"screenshot-automatic": ["ANIMALS", "ART", "BIRDS", "BOOK", "CATS", "DOGS", "INSECTS", "MAMMALS", "MEDIA", "NATURE", "REPTILES"],
+				},
+			},
+			FlightUtilities: {
+				FlightURL: "https://api2.smoot.apple.com/flight",
+				FallbackFlightURL: "https://api2.smoot.apple.com/flight",
+			},
 			VisualIntelligence: {
 				EnableDomains: ["pets", "media", "books", "art", "nature", "landmarks"],
 				SupportedDomains: ["ART", "BOOK", "MEDIA", "LANDMARK", "ANIMALS", "BIRDS", "FOOD", "SIGN_SYMBOL", "AUTO_SYMBOL", "DOGS", "NATURE", "NATURAL_LANDMARK", "INSECTS", "REPTILES", "ALBUM", "STOREFRONT", "LAUNDRY_CARE_SYMBOL", "CATS", "OBJECT_2D", "SCULPTURE", "SKYLINE", "MAMMALS"],

@@ -466,9 +466,13 @@ export const spotlight: Arg[] = [
         key: "Functions",
         name: "功能",
         type: "array",
-        defaultValue: ["encryptedvisualsearch", "flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
+        defaultValue: ["cameravisualsearch", "encryptedvisualsearch", "flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
         description: "启用的「Siri 建议」功能，未选的功能不代表关闭，仅代表还原到该地区默认设置状态。",
         options: [
+            {
+                key: "cameravisualsearch",
+                label: "相机视觉搜索",
+            },
             {
                 key: "encryptedvisualsearch",
                 label: "加密视觉搜索",
@@ -517,7 +521,7 @@ export const spotlight: Arg[] = [
         type: "string",
         boxJsType: "text",
         defaultValue: "https://gateway-oblivious.apple.com/encryptedvisualsearch",
-        description: "加密视觉搜索的 search_url。留空时不改写上游值，也不插入该属性。",
+        description: "加密视觉搜索的 search_url。留空或 undefined 时不检查、不改写该 URL，也不插入该属性。",
     },
     {
         key: "EncryptedVisualSearchSupportedUsecases",
@@ -538,15 +542,7 @@ export const spotlight: Arg[] = [
         type: "string",
         boxJsType: "text",
         defaultValue: "https://guzzoni.smoot.apple.com/search",
-        description: "Siri 的 search_url。留空时不改写上游值，也不插入该属性。",
-    },
-    {
-        key: "SiriSAMSearchURL",
-        name: "[Siri] SAM 搜索 URL",
-        type: "string",
-        boxJsType: "text",
-        defaultValue: "https://api-siri-prod.apple.com",
-        description: "根级 sam_search_url。留空时不改写上游值，也不插入该属性。",
+        description: "Siri 的 search_url。留空或 undefined 时不检查、不改写该 URL，也不插入该属性。",
     },
     {
         key: "SafariSmartHistory",
@@ -556,6 +552,38 @@ export const spotlight: Arg[] = [
         description: "是否在 Safari 浏览器中启用基于历史记录的Siri建议功能，启用后将在Safari浏览器起始页推荐基于时间地点跨设备等的相关浏览记录。",
     },
 ];
+
+const messages: Arg[] = [
+    {
+        key: "MessagesMinQueryLen",
+        name: "[信息] 最短查询长度",
+        type: "number",
+        boxJsType: "text",
+        defaultValue: "",
+        placeholder: "1",
+        description: "messages.min_query_len。默认留空不改写；填写数字后仅对已选的信息功能生效。",
+    },
+    {
+        key: "MessagesSearchRenderTimeout",
+        name: "[信息] 搜索渲染超时",
+        type: "number",
+        boxJsType: "text",
+        defaultValue: "",
+        placeholder: "200",
+        description: "messages.search_render_timeout。默认留空不改写；填写数字后仅对已选的信息功能生效。",
+    },
+];
+
+const siriSAMSearchURL: Arg = {
+    key: "SiriSAMSearchURL",
+    name: "[Siri] SAM 搜索 URL",
+    type: "string",
+    boxJsType: "text",
+    defaultValue: "https://api-siri-prod.apple.com",
+    description: "根级 sam_search_url。留空或 undefined 时不检查、不改写该 URL，也不插入该属性。",
+};
+
+export const spotlightFull: Arg[] = [...spotlight, ...messages, siriSAMSearchURL];
 
 export const storage: Arg[] = [
     {
