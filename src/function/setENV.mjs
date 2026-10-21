@@ -19,6 +19,7 @@ export default function setENV(name, platforms, database) {
 		case "Spotlight":
 			if (!Array.isArray(Settings?.Domains)) _.set(Settings, "Domains", Settings?.Domains ? [Settings.Domains.toString()] : []);
 			if (!Array.isArray(Settings?.Functions)) _.set(Settings, "Functions", Settings?.Functions ? [Settings.Functions.toString()] : []);
+			if (!Array.isArray(Settings?.EncryptedVisualSearchSupportedUsecases)) _.set(Settings, "EncryptedVisualSearchSupportedUsecases", Settings?.EncryptedVisualSearchSupportedUsecases ? [Settings.EncryptedVisualSearchSupportedUsecases.toString()] : []);
 			break;
 	}
 	Console.info(`typeof Settings: ${typeof Settings}`, `Settings: ${JSON.stringify(Settings, null, 2)}`);

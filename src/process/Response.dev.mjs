@@ -98,8 +98,8 @@ export async function Response($request, $response) {
 										case "encryptedvisualsearch":
 											if (Settings.Functions.includes("encryptedvisualsearch")) {
 												_.set(Overrides, "encryptedvisualsearch.enabled", true);
-												_.set(Overrides, "encryptedvisualsearch.search_url", "https://gateway-oblivious.apple.com/encryptedvisualsearch");
-												_.set(Overrides, "encryptedvisualsearch.supported_usecases", ["VISUAL_LOOKUP_LANDMARK", "VISUAL_LOOKUP_STOREFRONT", "ENCRYPTED_PQA_GEO", "ENCRYPTED_GENMOJI"]);
+												if (Settings.EncryptedVisualSearchURL) _.set(Overrides, "encryptedvisualsearch.search_url", Settings.EncryptedVisualSearchURL);
+												_.set(Overrides, "encryptedvisualsearch.supported_usecases", Settings.EncryptedVisualSearchSupportedUsecases);
 											}
 											_.set(Overrides, "encryptedvisualsearch.feedback_enabled", false);
 											_.set(Overrides, "encryptedvisualsearch.experiments_custom_feedback_enabled", false);
@@ -109,8 +109,6 @@ export async function Response($request, $response) {
 												_.set(Overrides, "flightutilities.enabled", true);
 												_.set(Overrides, "flightutilities.flight_url", "https://api2.smoot.apple.com/flight");
 												_.set(Overrides, "flightutilities.fallback_flight_url", "https://api2.smoot.apple.com/flight");
-												delete body.flight_url;
-												delete body.fallback_flight_url;
 											}
 											_.set(Overrides, "flightutilities.feedback_enabled", false);
 											_.set(Overrides, "flightutilities.experiments_custom_feedback_enabled", false);
@@ -147,8 +145,8 @@ export async function Response($request, $response) {
 										case "siri":
 											if (Settings.Functions.includes("siri")) {
 												_.set(Overrides, "siri.enabled", true);
-												_.set(Overrides, "siri.search_url", "https://guzzoni.smoot.apple.com/search");
-												body.sam_search_url = "https://api-siri-prod.apple.com";
+												if (Settings.SiriSearchURL) _.set(Overrides, "siri.search_url", Settings.SiriSearchURL);
+												if (Settings.SiriSAMSearchURL) body.sam_search_url = Settings.SiriSAMSearchURL;
 											}
 											_.set(Overrides, "siri.feedback_enabled", false);
 											_.set(Overrides, "siri.experiments_custom_feedback_enabled", false);

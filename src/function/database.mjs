@@ -13,6 +13,10 @@ export default {
 			CountryCode: "SG",
 			Domains: ["web", "itunes", "app_store", "movies", "restaurants", "maps"],
 			Functions: ["encryptedvisualsearch", "flightutilities", "lookup", "mail", "messages", "news", "safari", "siri", "spotlight", "visualintelligence"],
+			EncryptedVisualSearchURL: "https://gateway-oblivious.apple.com/encryptedvisualsearch",
+			EncryptedVisualSearchSupportedUsecases: ["VISUAL_LOOKUP_LANDMARK", "VISUAL_LOOKUP_STOREFRONT", "ENCRYPTED_PQA_GEO", "ENCRYPTED_GENMOJI"],
+			SiriSearchURL: "https://guzzoni.smoot.apple.com/search",
+			SiriSAMSearchURL: "https://api-siri-prod.apple.com",
 			SafariSmartHistory: true,
 		},
 		Configs: {

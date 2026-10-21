@@ -72,6 +72,46 @@ export interface Settings {
      */
     Functions?: ('encryptedvisualsearch' | 'flightutilities' | 'lookup' | 'mail' | 'messages' | 'news' | 'safari' | 'siri' | 'spotlight' | 'visualintelligence')[];
     /**
+     * [加密视觉搜索] 搜索 URL
+     *
+     * 加密视觉搜索的 search_url。留空时不改写上游值，也不插入该属性。
+     *
+     * @defaultValue "https://gateway-oblivious.apple.com/encryptedvisualsearch"
+     */
+    EncryptedVisualSearchURL?: string;
+    /**
+     * [加密视觉搜索] 支持的用途
+     *
+     * 加密视觉搜索的 supported_usecases。取消全部勾选时写入空列表。
+     *
+     * @remarks
+     *
+     * Possible values:
+     * - `'VISUAL_LOOKUP_LANDMARK'` - 地标视觉查询
+     * - `'VISUAL_LOOKUP_STOREFRONT'` - 店面视觉查询
+     * - `'ENCRYPTED_PQA_GEO'` - 加密 PQA 地理查询
+     * - `'ENCRYPTED_GENMOJI'` - 加密 Genmoji
+     *
+     * @defaultValue ["VISUAL_LOOKUP_LANDMARK","VISUAL_LOOKUP_STOREFRONT","ENCRYPTED_PQA_GEO","ENCRYPTED_GENMOJI"]
+     */
+    EncryptedVisualSearchSupportedUsecases?: ('VISUAL_LOOKUP_LANDMARK' | 'VISUAL_LOOKUP_STOREFRONT' | 'ENCRYPTED_PQA_GEO' | 'ENCRYPTED_GENMOJI')[];
+    /**
+     * [Siri] 搜索 URL
+     *
+     * Siri 的 search_url。留空时不改写上游值，也不插入该属性。
+     *
+     * @defaultValue "https://guzzoni.smoot.apple.com/search"
+     */
+    SiriSearchURL?: string;
+    /**
+     * [Siri] SAM 搜索 URL
+     *
+     * 根级 sam_search_url。留空时不改写上游值，也不插入该属性。
+     *
+     * @defaultValue "https://api-siri-prod.apple.com"
+     */
+    SiriSAMSearchURL?: string;
+    /**
      * Safari 智能历史记录
      *
      * 是否在 Safari 浏览器中启用基于历史记录的Siri建议功能，启用后将在Safari浏览器起始页推荐基于时间地点跨设备等的相关浏览记录。

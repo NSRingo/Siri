@@ -129,8 +129,8 @@ for (const variant of ["", ".dev"]) {
         for (const key of Object.keys(input.overrides.siri)) assert.equal(body.overrides.siri[key], input.overrides.siri[key]);
         assert.equal(body.overrides.flightutilities.flight_url, input.flight_url);
         assert.equal(body.overrides.flightutilities.fallback_flight_url, input.fallback_flight_url);
-        assert.equal(Object.hasOwn(body, "flight_url"), false);
-        assert.equal(Object.hasOwn(body, "fallback_flight_url"), false);
+        assert.equal(body.flight_url, input.flight_url);
+        assert.equal(body.fallback_flight_url, input.fallback_flight_url);
         assert.equal(body.request_timeout, input.request_timeout);
         for (const name of ["encryptedvisualsearch", "siri", "flightutilities"]) {
             assert.equal(body.overrides[name].feedback_enabled, false);
@@ -163,6 +163,56 @@ for (const variant of ["", ".dev"]) {
             assert.equal(body.overrides[name].experiments_custom_feedback_enabled, false);
         }
     });
+
+    test(`${variant || "release"}: URL settings and usecase checkbox selections reach bag overrides`, async () => {
+        for (const usecases of [["ENCRYPTED_GENMOJI"], ["VISUAL_LOOKUP_LANDMARK", "ENCRYPTED_GENMOJI"], []]) {
+            const argument = new URLSearchParams({
+                Storage: "Argument",
+                SiriSearchURL: "https://custom.example/siri?mode=search",
+                SiriSAMSearchURL: "https://custom.example/sam",
+                EncryptedVisualSearchURL: "https://custom.example/encrypted",
+                EncryptedVisualSearchSupportedUsecases: usecases.join(","),
+            }).toString();
+            const input = { flight_url: "https://server.example/flight", fallback_flight_url: "https://server.example/fallback-flight", overrides: {} };
+            const result = await replay("response", variant, {
+                url: "https://api.smoot.apple.com/bag", method: "GET", headers: {},
+            }, {
+                argument,
+                response: { status: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) },
+            });
+            const body = JSON.parse(result.body);
+            assert.equal(body.overrides.siri.search_url, "https://custom.example/siri?mode=search");
+            assert.equal(body.sam_search_url, "https://custom.example/sam");
+            assert.equal(body.overrides.encryptedvisualsearch.search_url, "https://custom.example/encrypted");
+            assert.deepEqual(body.overrides.encryptedvisualsearch.supported_usecases, usecases);
+            assert.equal(body.flight_url, input.flight_url);
+            assert.equal(body.fallback_flight_url, input.fallback_flight_url);
+        }
+    });
+
+    for (const upstreamURLs of [false, true]) {
+        test(`${variant || "release"}: blank BoxJs URLs ${upstreamURLs ? "preserve upstream properties" : "do not insert properties"}`, async () => {
+            const input = { overrides: { encryptedvisualsearch: {}, siri: {} } };
+            if (upstreamURLs) {
+                input.overrides.encryptedvisualsearch.search_url = "https://server.example/encrypted";
+                input.overrides.siri.search_url = "https://server.example/siri";
+                input.sam_search_url = "https://server.example/sam";
+            }
+            const result = await replay("response", variant, {
+                url: "https://api.smoot.apple.com/bag", method: "GET", headers: {},
+            }, {
+                storage: { Spotlight: { Settings: { EncryptedVisualSearchURL: "", SiriSearchURL: "", SiriSAMSearchURL: "" } } },
+                response: { status: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify(input) },
+            });
+            const body = JSON.parse(result.body);
+            for (const name of ["encryptedvisualsearch", "siri"]) {
+                assert.equal(body.overrides[name].search_url, input.overrides[name].search_url);
+                assert.equal(Object.hasOwn(body.overrides[name], "search_url"), upstreamURLs);
+            }
+            assert.equal(body.sam_search_url, input.sam_search_url);
+            assert.equal(Object.hasOwn(body, "sam_search_url"), upstreamURLs);
+        });
+    }
 
     for (const app of ["Loon", "Loon bodyBytes", "Quantumult X"]) {
         for (const gzip of [false, true]) {
