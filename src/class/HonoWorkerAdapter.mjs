@@ -1,3 +1,5 @@
+import { qs } from "@nsnanocat/util/polyfill/qs.mjs";
+
 /**
  * Hono 路由上下文类型。
  * Hono route context type.
@@ -54,6 +56,7 @@ export default class HonoWorkerAdapter {
      */
     static routeRewrite(url, restPath = "") {
         switch (true) {
+            case url.hostname.startsWith("api-smoot."):
             case url.hostname.startsWith("siri."):
             case url.hostname.startsWith("dev.siri."): {
                 url.hostname = "api.smoot.apple.com";
@@ -174,11 +177,11 @@ export default class HonoWorkerAdapter {
      */
     static buildArgument($request = {}) {
         if ($request.headers.$argument) {
-            globalThis.$argument = $request.headers.$argument;
+            globalThis.$argument = qs.parse($request.headers.$argument);
             delete $request.headers.$argument;
         } else {
             const url = new URL($request.url);
-            globalThis.$argument = url.search.slice(1);
+            globalThis.$argument = qs.parse(url.search.slice(1));
             [...url.searchParams.keys()].filter(k => /^[A-Z]/.test(k)).forEach(k => url.searchParams.delete(k));
             $request.url = url.toString();
         }

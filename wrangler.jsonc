@@ -1,6 +1,6 @@
 {
-  "name": "siri",
-  "compatibility_date": "2025-11-21",
+  "name": "api-smoot",
+  "compatibility_date": "2026-10-21",
   "compatibility_flags": [
     "nodejs_compat"
   ],
