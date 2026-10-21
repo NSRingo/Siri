@@ -95,6 +95,15 @@ export async function Response($request, $response) {
 									//_.set(Overrides, `${func}.enabled`, true);
 									//_.set(Overrides, `${func}.feedback_enabled`, true);
 									switch (func) {
+										case "cameravisualsearch":
+											if (Settings.Functions.includes("cameravisualsearch")) {
+												_.set(Overrides, "cameravisualsearch.enabled", true);
+												_.set(Overrides, ["cameravisualsearch", "supported_domains", "camera-live"], [...new Set([...(Overrides.cameravisualsearch?.supported_domains?.["camera-live"] ?? []), ...Configs.CameraVisualSearch.SupportedDomains["camera-live"]])]);
+												_.set(Overrides, ["cameravisualsearch", "supported_domains", "screenshot-automatic"], [...new Set([...(Overrides.cameravisualsearch?.supported_domains?.["screenshot-automatic"] ?? []), ...Configs.CameraVisualSearch.SupportedDomains["screenshot-automatic"]])]);
+											}
+											_.set(Overrides, "cameravisualsearch.feedback_enabled", false);
+											_.set(Overrides, "cameravisualsearch.experiments_custom_feedback_enabled", false);
+											break;
 										case "encryptedvisualsearch":
 											if (Settings.Functions.includes("encryptedvisualsearch")) {
 												_.set(Overrides, "encryptedvisualsearch.enabled", true);
@@ -107,8 +116,8 @@ export async function Response($request, $response) {
 										case "flightutilities":
 											if (Settings.Functions.includes("flightutilities")) {
 												_.set(Overrides, "flightutilities.enabled", true);
-												_.set(Overrides, "flightutilities.flight_url", "https://api2.smoot.apple.com/flight");
-												_.set(Overrides, "flightutilities.fallback_flight_url", "https://api2.smoot.apple.com/flight");
+												_.set(Overrides, "flightutilities.flight_url", Configs.FlightUtilities.FlightURL);
+												_.set(Overrides, "flightutilities.fallback_flight_url", Configs.FlightUtilities.FallbackFlightURL);
 											}
 											_.set(Overrides, "flightutilities.feedback_enabled", false);
 											_.set(Overrides, "flightutilities.experiments_custom_feedback_enabled", false);
@@ -128,7 +137,11 @@ export async function Response($request, $response) {
 											_.set(Overrides, "mail.experiments_custom_feedback_enabled", false);
 											break;
 										case "messages":
-											if (Settings.Functions.includes("messages")) _.set(Overrides, "messages.enabled", true);
+											if (Settings.Functions.includes("messages")) {
+												_.set(Overrides, "messages.enabled", true);
+												if (typeof Settings.MessagesMinQueryLen === "number") _.set(Overrides, "messages.min_query_len", Settings.MessagesMinQueryLen);
+												if (typeof Settings.MessagesSearchRenderTimeout === "number") _.set(Overrides, "messages.search_render_timeout", Settings.MessagesSearchRenderTimeout);
+											}
 											_.set(Overrides, "messages.feedback_enabled", false);
 											_.set(Overrides, "messages.experiments_custom_feedback_enabled", false);
 											break;
@@ -161,11 +174,13 @@ export async function Response($request, $response) {
 											//_.set(Overrides, "spotlight.collect_anonymous_metadata", true);
 											break;
 										case "visualintelligence":
-											if (Settings.Functions.includes("visualintelligence")) _.set(Overrides, "visualintelligence.enabled", true);
+											if (Settings.Functions.includes("visualintelligence")) {
+												_.set(Overrides, "visualintelligence.enabled", true);
+												_.set(Overrides, "visualintelligence.supported_domains", [...new Set([...(Overrides.visualintelligence?.supported_domains ?? []), ...Configs.VisualIntelligence.SupportedDomains])]);
+											}
 											_.set(Overrides, "visualintelligence.feedback_enabled", false);
 											_.set(Overrides, "visualintelligence.experiments_custom_feedback_enabled", false);
-											//_.set(Overrides, "visualintelligence.enabled_domains", [...new Set([...(Overrides.visualIntelligence?.enabled_domains ?? []), ...Configs.VisualIntelligence.EnableDomains])]);
-											//_.set(Overrides, "visualintelligence.supported_domains", [...new Set([...(Overrides.visualIntelligence?.supported_domains ?? []), ...Configs.VisualIntelligence.SupportedDomains])]);
+											//_.set(Overrides, "visualintelligence.enabled_domains", [...new Set([...(Overrides.visualintelligence?.enabled_domains ?? []), ...Configs.VisualIntelligence.EnableDomains])]);
 											break;
 									}
 								});
